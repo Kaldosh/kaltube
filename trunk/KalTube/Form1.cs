@@ -53,10 +53,13 @@ namespace KalTube
             var ret = new Dictionary<string, string>();
             using (var sr = new System.IO.StreamReader("settings.txt"))
             {
-                var thisLine = sr.ReadLine();
-                var thisKey = thisLine.Substring(0, thisLine.IndexOf("="));
-                var thisVal = thisLine.Substring(thisLine.IndexOf("=") + 1);
-                ret.Add(thisKey, thisVal);
+                string thisLine;
+                while ((thisLine = sr.ReadLine()) != null)
+                {
+                    var thisKey = thisLine.Substring(0, thisLine.IndexOf("="));
+                    var thisVal = thisLine.Substring(thisLine.IndexOf("=") + 1);
+                    ret.Add(thisKey, thisVal);
+                }
             }
             return ret;
         }
@@ -168,6 +171,7 @@ namespace KalTube
         public void SaveVids(List<KTVideo> cacheVids)
         {
             var vidfile = new System.IO.FileInfo("vidcache-" + g_userLookAt + ".xml");
+            if (!vidfile.Directory.Exists) vidfile.Directory.Create();
             var ser = new System.Xml.Serialization.XmlSerializer(typeof(List<KTVideo>));
             using (var vidstream = vidfile.Create())
             {
@@ -178,6 +182,7 @@ namespace KalTube
         public List<KTVideo> LoadVidCache()
         {
             var vidfile = new System.IO.FileInfo("vidcache-" + g_userLookAt + ".xml");
+            if (!vidfile.Directory.Exists) vidfile.Directory.Create();
             var ser = new System.Xml.Serialization.XmlSerializer(typeof(List<KTVideo>));
             using (var vidstream = vidfile.OpenText())
             {
@@ -229,6 +234,7 @@ namespace KalTube
         private List<string> GetSubsList()
         {
             var subcache = new System.IO.FileInfo("subcache-" + g_userLookAt + ".txt");
+            if (!subcache.Directory.Exists) subcache.Directory.Create();
             if (subcache.Exists && subcache.LastWriteTime.AddHours(1) > DateTime.Now && subcache.LastWriteTime <= DateTime.Now)
             {
                 return GetCachedSubsList(subcache);
@@ -283,6 +289,7 @@ namespace KalTube
         {
             var thumbname = "thumbcache/thumb-" + videoId;
             var thumbfile = new System.IO.FileInfo(thumbname);
+            if (!thumbfile.Directory.Exists) thumbfile.Directory.Create();
             if (!thumbfile.Exists)
                 wc.DownloadFile(thumburl, thumbname);
             var bmp = new Bitmap(thumbname);
@@ -496,6 +503,7 @@ namespace KalTube
         private List<string> GetSubs()
         {
             var subcache = new System.IO.FileInfo("subcache-" + g_userLookAt + ".txt");
+            if (!subcache.Directory.Exists) subcache.Directory.Create();
             var sublist = GetFreshSubsList(subcache);
             return sublist;
         }
@@ -561,7 +569,7 @@ namespace KalTube
                 }
                 else
                 {
-                    var vid = (KTVideo)lstMain.Items[i].Tag;
+                    var vid = (KTVideo)lstMain.Items[itm.Index].Tag;
                     QueueVideo(vid);
                 }
             }
@@ -674,6 +682,16 @@ namespace KalTube
                     QueueVideo(vid);
                 }
             }
+        }
+
+        private void btnStopFlashing_Click(object sender, EventArgs e)
+        {
+            tmrFlash.Enabled = !tmrFlash.Enabled;
+        }
+
+        private void mnuListMain_Opening(object sender, CancelEventArgs e)
+        {
+
         }
 
 

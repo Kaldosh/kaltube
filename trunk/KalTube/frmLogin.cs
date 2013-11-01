@@ -41,9 +41,12 @@ namespace KalTube
             if (!setdefault)
             {
                 setdefault = true;
-                if (Form1.MySettings["username"] != null)
+                string username;
+                if (Form1.MySettings.TryGetValue("username", out username))
+                {
                     Username = Form1.MySettings["username"];
-                txtPassword.Focus();
+                    txtPassword.Focus();
+                }
             }
         }
     }

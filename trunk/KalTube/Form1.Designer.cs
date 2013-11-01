@@ -58,6 +58,7 @@
             this.tmrFlash = new System.Windows.Forms.Timer(this.components);
             this.btnReAddAll = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnStopFlashing = new System.Windows.Forms.Button();
             this.mnuListMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,7 +117,8 @@
             this.mnuOpenInBrowser,
             this.mnuRemove});
             this.mnuListMain.Name = "mnuListMain";
-            this.mnuListMain.Size = new System.Drawing.Size(187, 76);
+            this.mnuListMain.Size = new System.Drawing.Size(187, 98);
+            this.mnuListMain.Opening += new System.ComponentModel.CancelEventHandler(this.mnuListMain_Opening);
             // 
             // mnuAddToPlaylist
             // 
@@ -311,11 +313,22 @@
             this.checkBox1.Text = "Slow - TODO";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // btnStopFlashing
+            // 
+            this.btnStopFlashing.Location = new System.Drawing.Point(274, 16);
+            this.btnStopFlashing.Name = "btnStopFlashing";
+            this.btnStopFlashing.Size = new System.Drawing.Size(13, 23);
+            this.btnStopFlashing.TabIndex = 1016;
+            this.btnStopFlashing.Text = "stop flashing";
+            this.btnStopFlashing.UseVisualStyleBackColor = true;
+            this.btnStopFlashing.Click += new System.EventHandler(this.btnStopFlashing_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 405);
+            this.Controls.Add(this.btnStopFlashing);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btnReAddAll);
             this.Controls.Add(this.chkOffline);
@@ -373,6 +386,7 @@
         private System.Windows.Forms.Timer tmrFlash;
         private System.Windows.Forms.Button btnReAddAll;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button btnStopFlashing;
     }
 }
 
