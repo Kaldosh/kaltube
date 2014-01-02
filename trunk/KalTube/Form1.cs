@@ -38,6 +38,12 @@ namespace KalTube
         string g_userLookAt;
         string g_userLoginAs;
 
+        //for debugging
+        public static object spare1;
+        public static object spare2;
+
+        public static string backupsPath = @"backups\";
+
         private static Dictionary<string, string> cachedSettings = null;
         public static Dictionary<string, string> MySettings
         {
@@ -93,9 +99,6 @@ namespace KalTube
         private int flashctr = 0;
 
 
-        //for debugging
-        object spare1;
-        object spare2;
 
         public Form1()
         {
@@ -149,7 +152,7 @@ namespace KalTube
                 var username = sub;
                 var vids = g_reqMakerSelf.GetVideoFeed(username);
                 vids.AutoPaging = true;
-                vids.Maximum = limit_vids;
+                //vids.Maximum = limit_vids;
                 foreach (var vid in vids.Entries)
                 {
                     var newVid = new KTVideo(vid);
@@ -177,6 +180,13 @@ namespace KalTube
             {
                 ser.Serialize(vidstream, cacheVids);
             }
+            makeBackup(vidfile);
+        }
+
+        private static void makeBackup(System.IO.FileInfo pfile)
+        {
+            if (System.IO.Directory.Exists(backupsPath) == false) System.IO.Directory.CreateDirectory(backupsPath);
+            pfile.CopyTo(backupsPath + DateTime.Now.ToString("yyyy-MM-dd HH.mm.ss") + pfile.Name);
         }
 
         public List<KTVideo> LoadVidCache()
@@ -198,6 +208,7 @@ namespace KalTube
             pbMain.Maximum = cacheVids.Count;
             lstMain.Items.Clear();
             var lastUpdate = DateTime.UtcNow;
+
             foreach (var vid in cacheVids)
             {
                 var instant = DateTime.UtcNow;
@@ -224,8 +235,11 @@ namespace KalTube
 
                 newitm.Tag = vid;
                 lstMain.Items.Add(newitm);
+
             }
+
             pbMain.Value = 0;
+
 
         }
 
@@ -271,9 +285,9 @@ namespace KalTube
             Application.DoEvents();
             foreach (var itm in reqsubs.Entries)
             {
-                Application.DoEvents();
                 subslist.Add(itm.UserName);
                 pbMain.Value++;
+                Application.DoEvents();
             }
             using (var sw = cachefile.CreateText())
             {
@@ -282,12 +296,16 @@ namespace KalTube
                     sw.WriteLine(itm);
                 }
             }
+            makeBackup(cachefile);
             return subslist;
         }
 
         private int AddImg(System.Net.WebClient wc, string thumburl, string videoId)
         {
-            var thumbname = "thumbcache/thumb-" + videoId;
+            string ext = ".jpg";
+            var dot = thumburl.LastIndexOf(".");
+            if (dot >= 0) ext = thumburl.Substring(dot);
+            var thumbname = "thumbcache/thumb-" + videoId + ext;
             var thumbfile = new System.IO.FileInfo(thumbname);
             if (!thumbfile.Directory.Exists) thumbfile.Directory.Create();
             if (!thumbfile.Exists)
