@@ -119,6 +119,6 @@
   </resheader>
   <data name="label4.Text" xml:space="preserve">
     <value>Username is who to look at, and also who to login as for authenticated features. Password is for authenticated features, such as adding it to your playlist (or seeing non-public things).
-Future versions will separate login and look at; and login will be optional.</value>
+Future versions will separate login and look at; and login will be optional. for now, its part of initialisation so it cant be later</value>
   </data>
 </root>
