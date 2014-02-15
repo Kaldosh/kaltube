@@ -432,12 +432,9 @@ namespace KalTube
             {
                 int idx0 = lstMain.FocusedItem.Index - 1;
                 int idx1 = lstMain.FocusedItem.Index;
-                int idx2 = lstMain.FocusedItem.Index + 1;
                 if (idx0 < 0) idx0 = 0;
-                if (idx2 >= lstMain.Items.Count) idx2 = lstMain.Items.Count - 1;
 
                 lstMain.EnsureVisible(idx0);
-                lstMain.EnsureVisible(idx2);
                 lstMain.EnsureVisible(idx1);
 
             }
@@ -708,6 +705,16 @@ namespace KalTube
         }
 
         private void mnuListMain_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void getSubsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void readdListToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
