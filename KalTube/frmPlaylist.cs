@@ -102,7 +102,7 @@ namespace KalTube
             {
                 var pl = new Google.YouTube.Playlist();
                 pl.Title = plname;
-                pl.Summary = "Playlist created by KalTube on " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss K");
+                pl.Summary = "Playlist created using KalTube on " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss K") + @" - See code.google.com/p/kaltube/";
                 var createdPlaylist = ReqMaker.Insert(
                   new Uri("http://gdata.youtube.com/feeds/api/users/default/playlists"), pl);
 
