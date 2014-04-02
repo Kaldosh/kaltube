@@ -27,6 +27,7 @@ namespace KalTube
         public static string InputBox(string prompt, string defaultText)
         {
             var frm = new frmInputBox();
+            frm.lblPrompt.Text = prompt;
             frm.txtInput.Text = defaultText;
             var result = frm.ShowDialog();
             if (result == DialogResult.Cancel) return null; else return frm.txtInput.Text;

@@ -62,12 +62,18 @@
             this.mnuMain = new System.Windows.Forms.MenuStrip();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allinoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuIndividualSteps = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuGetSubs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuGetVidsFromSubs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuShowVids = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuChoosePlaylist = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNowTickThemBelowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.getSubsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getVidsFromSubsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showVidsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.choosePlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tickThemBelowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFindByTitle = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFindNext = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateLimitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSlowlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +84,11 @@
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.choosePlaylistToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.mnuListMain.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
@@ -138,7 +149,6 @@
             this.mnuRemove});
             this.mnuListMain.Name = "mnuListMain";
             this.mnuListMain.Size = new System.Drawing.Size(187, 76);
-            this.mnuListMain.Opening += new System.ComponentModel.CancelEventHandler(this.mnuListMain_Opening);
             // 
             // mnuAddToPlaylist
             // 
@@ -231,9 +241,9 @@
             // pbMain
             // 
             this.pbMain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbMain.Location = new System.Drawing.Point(878, 41);
+            this.pbMain.Location = new System.Drawing.Point(1053, 0);
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(223, 25);
+            this.pbMain.Size = new System.Drawing.Size(223, 24);
             this.pbMain.TabIndex = 1006;
             // 
             // lblPbMain
@@ -360,12 +370,10 @@
             // 
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allinoneToolStripMenuItem,
+            this.mnuIndividualSteps,
             this.toolStripMenuItem1,
-            this.getSubsToolStripMenuItem,
-            this.getVidsFromSubsToolStripMenuItem,
-            this.showVidsToolStripMenuItem,
-            this.choosePlaylistToolStripMenuItem,
-            this.tickThemBelowToolStripMenuItem});
+            this.sortToolStripMenuItem,
+            this.findToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.actionsToolStripMenuItem.Text = "Actions";
@@ -373,44 +381,99 @@
             // allinoneToolStripMenuItem
             // 
             this.allinoneToolStripMenuItem.Name = "allinoneToolStripMenuItem";
-            this.allinoneToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.allinoneToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.allinoneToolStripMenuItem.Text = "All-in-one";
+            // 
+            // mnuIndividualSteps
+            // 
+            this.mnuIndividualSteps.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuGetSubs,
+            this.mnuGetVidsFromSubs,
+            this.mnuShowVids,
+            this.mnuChoosePlaylist,
+            this.mnuNowTickThemBelowToolStripMenuItem});
+            this.mnuIndividualSteps.Name = "mnuIndividualSteps";
+            this.mnuIndividualSteps.Size = new System.Drawing.Size(156, 22);
+            this.mnuIndividualSteps.Text = "Individual steps";
+            // 
+            // mnuGetSubs
+            // 
+            this.mnuGetSubs.Name = "mnuGetSubs";
+            this.mnuGetSubs.Size = new System.Drawing.Size(216, 22);
+            this.mnuGetSubs.Text = "&1. Get Subs List";
+            this.mnuGetSubs.Click += new System.EventHandler(this.mnuGetSubs_Click);
+            // 
+            // mnuGetVidsFromSubs
+            // 
+            this.mnuGetVidsFromSubs.Name = "mnuGetVidsFromSubs";
+            this.mnuGetVidsFromSubs.Size = new System.Drawing.Size(216, 22);
+            this.mnuGetVidsFromSubs.Text = "&2. Get Vids from subs";
+            this.mnuGetVidsFromSubs.Click += new System.EventHandler(this.mnuGetVidsFromSubs_Click);
+            // 
+            // mnuShowVids
+            // 
+            this.mnuShowVids.Name = "mnuShowVids";
+            this.mnuShowVids.Size = new System.Drawing.Size(216, 22);
+            this.mnuShowVids.Text = "&3. Show Vids";
+            this.mnuShowVids.Click += new System.EventHandler(this.mnuShowVids_Click);
+            // 
+            // mnuChoosePlaylist
+            // 
+            this.mnuChoosePlaylist.Name = "mnuChoosePlaylist";
+            this.mnuChoosePlaylist.Size = new System.Drawing.Size(216, 22);
+            this.mnuChoosePlaylist.Text = "&4. Choose Playlist";
+            this.mnuChoosePlaylist.Click += new System.EventHandler(this.mnuChoosePlaylist_Click);
+            // 
+            // mnuNowTickThemBelowToolStripMenuItem
+            // 
+            this.mnuNowTickThemBelowToolStripMenuItem.Enabled = false;
+            this.mnuNowTickThemBelowToolStripMenuItem.Name = "mnuNowTickThemBelowToolStripMenuItem";
+            this.mnuNowTickThemBelowToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.mnuNowTickThemBelowToolStripMenuItem.Text = "&5. Now go tick them below";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(182, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 6);
             // 
-            // getSubsToolStripMenuItem
+            // sortToolStripMenuItem
             // 
-            this.getSubsToolStripMenuItem.Name = "getSubsToolStripMenuItem";
-            this.getSubsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.getSubsToolStripMenuItem.Text = "&1. Get Subs List";
+            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dateToolStripMenuItem});
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.sortToolStripMenuItem.Text = "Sort";
             // 
-            // getVidsFromSubsToolStripMenuItem
+            // dateToolStripMenuItem
             // 
-            this.getVidsFromSubsToolStripMenuItem.Name = "getVidsFromSubsToolStripMenuItem";
-            this.getVidsFromSubsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.getVidsFromSubsToolStripMenuItem.Text = "&2. Get Vids from subs";
+            this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
+            this.dateToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.dateToolStripMenuItem.Text = "Date";
             // 
-            // showVidsToolStripMenuItem
+            // findToolStripMenuItem
             // 
-            this.showVidsToolStripMenuItem.Name = "showVidsToolStripMenuItem";
-            this.showVidsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.showVidsToolStripMenuItem.Text = "&3. Show Vids";
+            this.findToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuFindByTitle,
+            this.mnuFindNext});
+            this.findToolStripMenuItem.Name = "findToolStripMenuItem";
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.findToolStripMenuItem.Text = "Find";
             // 
-            // choosePlaylistToolStripMenuItem
+            // mnuFindByTitle
             // 
-            this.choosePlaylistToolStripMenuItem.Name = "choosePlaylistToolStripMenuItem";
-            this.choosePlaylistToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.choosePlaylistToolStripMenuItem.Text = "&4. Choose Playlist";
+            this.mnuFindByTitle.Name = "mnuFindByTitle";
+            this.mnuFindByTitle.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.mnuFindByTitle.Size = new System.Drawing.Size(179, 22);
+            this.mnuFindByTitle.Text = "Find By &Title";
+            this.mnuFindByTitle.Click += new System.EventHandler(this.mnuFindByTitle_Click);
             // 
-            // tickThemBelowToolStripMenuItem
+            // mnuFindNext
             // 
-            this.tickThemBelowToolStripMenuItem.Enabled = false;
-            this.tickThemBelowToolStripMenuItem.Name = "tickThemBelowToolStripMenuItem";
-            this.tickThemBelowToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.tickThemBelowToolStripMenuItem.Text = "&5. Tick them below";
+            this.mnuFindNext.Name = "mnuFindNext";
+            this.mnuFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.mnuFindNext.Size = new System.Drawing.Size(179, 22);
+            this.mnuFindNext.Text = "Find Next";
+            this.mnuFindNext.Click += new System.EventHandler(this.mnuFindNext_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -482,11 +545,48 @@
             this.loginToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.loginToolStripMenuItem.Text = "Login";
             // 
+            // BottomToolStripPanel
+            // 
+            this.BottomToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.BottomToolStripPanel.Name = "BottomToolStripPanel";
+            this.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.BottomToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.BottomToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // TopToolStripPanel
+            // 
+            this.TopToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopToolStripPanel.Name = "TopToolStripPanel";
+            this.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.TopToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.TopToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // RightToolStripPanel
+            // 
+            this.RightToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.RightToolStripPanel.Name = "RightToolStripPanel";
+            this.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.RightToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.RightToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // LeftToolStripPanel
+            // 
+            this.LeftToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.LeftToolStripPanel.Name = "LeftToolStripPanel";
+            this.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.LeftToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.LeftToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // ContentPanel
+            // 
+            this.ContentPanel.Size = new System.Drawing.Size(150, 150);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 405);
+            this.Controls.Add(this.pbMain);
             this.Controls.Add(this.mnuMain);
             this.Controls.Add(this.btnGetSubs);
             this.Controls.Add(this.btnStopFlashing);
@@ -502,7 +602,6 @@
             this.Controls.Add(this.btnShowvids);
             this.Controls.Add(this.lblActions);
             this.Controls.Add(this.lstMain);
-            this.Controls.Add(this.pbMain);
             this.Controls.Add(this.btnGetVids);
             this.Controls.Add(this.btnChoosePlaylist);
             this.Name = "Form1";
@@ -553,11 +652,6 @@
         private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allinoneToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem getSubsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem getVidsFromSubsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showVidsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem choosePlaylistToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tickThemBelowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dateLimitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addSlowlyToolStripMenuItem;
@@ -568,6 +662,22 @@
         private System.Windows.Forms.ToolStripMenuItem windowsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem choosePlaylistToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuIndividualSteps;
+        private System.Windows.Forms.ToolStripMenuItem mnuGetSubs;
+        private System.Windows.Forms.ToolStripMenuItem mnuGetVidsFromSubs;
+        private System.Windows.Forms.ToolStripMenuItem mnuShowVids;
+        private System.Windows.Forms.ToolStripMenuItem mnuChoosePlaylist;
+        private System.Windows.Forms.ToolStripMenuItem mnuNowTickThemBelowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuFindByTitle;
+        private System.Windows.Forms.ToolStripMenuItem mnuFindNext;
+        private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
+        private System.Windows.Forms.ToolStripContentPanel ContentPanel;
     }
 }
 

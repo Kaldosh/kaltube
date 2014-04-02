@@ -38,6 +38,14 @@ namespace KalTube
         string g_userLookAt;
         string g_userLoginAs;
 
+        string findString = null;
+        eFindType findType;
+        enum eFindType
+        {
+            ByTitle = 1
+        }
+
+
         //for debugging
         public static object spare1;
         public static object spare2;
@@ -130,6 +138,11 @@ namespace KalTube
         }
 
         private void btnGetVids_Click(object sender, EventArgs e)
+        {
+            DoBtnGetVids();
+        }
+
+        private void DoBtnGetVids()
         {
             EnableButtons(false);
             var cacheVids = GetVids();
@@ -485,6 +498,15 @@ namespace KalTube
                 g_reqMakerSelf = new Google.YouTube.YouTubeRequest(g_settings);
                 dtpStart.Value = DateTime.Today.AddMonths(-1);
             }
+            else if (result == System.Windows.Forms.DialogResult.Ignore)
+            {
+                g_userLoginAs = null;
+                g_userLookAt = login.Username;
+                g_settings = new Google.YouTube.YouTubeRequestSettings("KalTube", g_devkey);
+                g_reqMakerSelf = new Google.YouTube.YouTubeRequest(g_settings);
+                dtpStart.Value = DateTime.Today.AddMonths(-1);
+
+            }
             else
             {
                 System.Environment.Exit(1);
@@ -494,7 +516,7 @@ namespace KalTube
         private void ChoosePlaylist()
         {
             //HACK: assumes valid pre-reqs
-            var plc = new frmPlaylist(g_userLoginAs, g_reqMakerSelf);
+            var plc = new frmPlaylist(g_userLookAt, g_reqMakerSelf);
             var result = plc.ShowDialog(this);
             if (result == System.Windows.Forms.DialogResult.OK && plc.ChosenPlaylist != null)
             {
@@ -508,6 +530,11 @@ namespace KalTube
         }
 
         private void btnGetSubs_Click(object sender, EventArgs e)
+        {
+            DoBtnGetSubs();
+        }
+
+        private void DoBtnGetSubs()
         {
             EnableButtons(false);
             var sublist = GetSubs();
@@ -534,9 +561,13 @@ namespace KalTube
 
         private void btnShowvids_Click(object sender, EventArgs e)
         {
+            DoBtnShowVids();
+        }
+
+        private void DoBtnShowVids()
+        {
             EnableButtons(false);
             LoadFilterAndShowVids();
-
             EnableButtons(true);
         }
 
@@ -554,7 +585,14 @@ namespace KalTube
 
         private void EnableButtons(bool v)
         {
-            btnGetSubs.Enabled = btnGetVids.Enabled = btnShowvids.Enabled = btnChoosePlaylist.Enabled = v;
+            mnuIndividualSteps.Enabled
+                = btnAllInOne.Enabled
+                = btnGetSubs.Enabled
+                = btnGetVids.Enabled
+                = btnShowvids.Enabled
+                = btnChoosePlaylist.Enabled
+                = v;
+
         }
 
 
@@ -704,20 +742,78 @@ namespace KalTube
             tmrFlash.Enabled = !tmrFlash.Enabled;
         }
 
-        private void mnuListMain_Opening(object sender, CancelEventArgs e)
+        private void mnuGetSubs_Click(object sender, EventArgs e)
+        {
+            DoBtnGetSubs();
+        }
+
+        private void mnuGetVidsFromSubs_Click(object sender, EventArgs e)
+        {
+            DoBtnGetVids();
+        }
+
+        private void mnuShowVids_Click(object sender, EventArgs e)
+        {
+            DoBtnShowVids();
+        }
+
+        private void mnuChoosePlaylist_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void getSubsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mnuFindByTitle_Click(object sender, EventArgs e)
         {
-
+            FindByTitle();
         }
 
-        private void readdListToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindByTitle()
         {
-
+            findType = eFindType.ByTitle;
+            findString = frmInputBox.InputBox("Search Text", findString);
+            FindNext();
         }
+
+        private void mnuFindNext_Click(object sender, EventArgs e)
+        {
+            if (findString == null) FindByTitle();
+            FindNext();
+        }
+        void FindNext()
+        {
+            if (lstMain.Items.Count == 0) return;
+            var startIdx = lstMain.FocusedItem.Index;
+            var numItms = lstMain.Items.Count;
+            var foundidx = -1;
+            //lstMain.FocusedItem = lstMain.FindItemWithText(findString, false, (lstMain.FocusedItem.Index + 1) % lstMain.Items.Count);
+
+            for (int i = (startIdx + 1) % numItms; i != startIdx; i = (i + 1) % numItms)
+            {
+                var vid = (KTVideo)lstMain.Items[i].Tag;
+                if (vid.Title.ToLowerInvariant().Contains(findString.ToLowerInvariant()))
+                {
+                    foundidx = i;
+                    break;
+                }
+            }
+            if (foundidx == -1)
+                MessageBox.Show("Not found");
+            else
+            {
+                lstMain.FocusedItem = lstMain.Items[foundidx];
+                for (int i = 0; i < numItms; i++)
+                {
+                    lstMain.Items[i].Selected = (i == foundidx);
+                }
+            }
+        }
+
+
+
+
+
+
+
 
 
 

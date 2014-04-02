@@ -20,6 +20,11 @@ namespace KalTube
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (Username == "" || Password == "")
+            {
+                MessageBox.Show("Please enter username and password.");
+                return;
+            }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
@@ -48,6 +53,17 @@ namespace KalTube
                     txtPassword.Focus();
                 }
             }
+        }
+
+        private void btnSkip_Click(object sender, EventArgs e)
+        {
+            if (Username == "")
+            {
+                MessageBox.Show("You still need a username; for who to look at.");
+                return;
+            }
+            this.DialogResult = System.Windows.Forms.DialogResult.Ignore;
+            this.Close();
         }
     }
 }

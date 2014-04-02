@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.txtInput = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPrompt = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -43,13 +43,13 @@
             this.txtInput.Size = new System.Drawing.Size(274, 20);
             this.txtInput.TabIndex = 0;
             // 
-            // label1
+            // lblPrompt
             // 
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(436, 62);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.lblPrompt.Location = new System.Drawing.Point(12, 9);
+            this.lblPrompt.Name = "lblPrompt";
+            this.lblPrompt.Size = new System.Drawing.Size(436, 62);
+            this.lblPrompt.TabIndex = 1;
+            this.lblPrompt.Text = "lblPrompt";
             // 
             // btnOK
             // 
@@ -83,7 +83,7 @@
             this.ClientSize = new System.Drawing.Size(460, 109);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPrompt);
             this.Controls.Add(this.txtInput);
             this.Name = "frmInputBox";
             this.Text = "frmInputBox";
@@ -96,7 +96,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtInput;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPrompt;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
     }
