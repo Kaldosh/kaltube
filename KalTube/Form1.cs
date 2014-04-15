@@ -488,6 +488,11 @@ namespace KalTube
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ShowLogin();
+        }
+
+        private void ShowLogin()
+        {
             var login = new frmLogin();
             var result = login.ShowDialog(this);
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -585,13 +590,9 @@ namespace KalTube
 
         private void EnableButtons(bool v)
         {
-            mnuIndividualSteps.Enabled
-                = btnAllInOne.Enabled
-                = btnGetSubs.Enabled
-                = btnGetVids.Enabled
-                = btnShowvids.Enabled
-                = btnChoosePlaylist.Enabled
-                = v;
+            mnuIndividualSteps.Enabled = v;
+                //= btnAllInOne.Enabled = btnGetSubs.Enabled = btnGetVids.Enabled = btnShowvids.Enabled = btnChoosePlaylist.Enabled
+                
 
         }
 
@@ -640,7 +641,14 @@ namespace KalTube
 
         private void btnAllInOne_Click(object sender, EventArgs e)
         {
-            tmrFlash.Enabled = false;
+            DoAllInOne();
+
+
+
+        }
+
+        private void DoAllInOne()
+        {
 
             lblCurrent.Text = "Loading playlists list";
             Application.DoEvents();
@@ -677,9 +685,6 @@ namespace KalTube
             {
                 MessageBox.Show("Vids loaded. You'll need to choose a playlist to be able to add them");
             }
-
-
-
         }
 
         private void btnAutoAdd_Click(object sender, EventArgs e)
@@ -687,7 +692,7 @@ namespace KalTube
             //TODO: criteria for:
             //auto adding to playlist, like a BoxxyBabee video; (also have time range)
             //auto deleting from selections, like a 2 hour nasa video
-            MessageBox.Show("TODO: criteria for:\r\nauto adding to playlist, like a BoxxyBabee video; (also have time range)\r\nauto deleting from selections, like a 2 hour nasa video");
+            MessageBox.Show("TODO: criteria for:\r\nauto adding to playlist, like a BoxxyBabee video; (also have time range)\r\nauto deleting from selections, like a 2 hour nasa video; and points based on how often a video is uploaded; with add/ignore history contributing to customized feed");
 
             //try
             //{
@@ -717,14 +722,14 @@ namespace KalTube
             OfflineMode = chkOffline.Checked;
         }
 
-        private void tmrFlash_Tick(object sender, EventArgs e)
-        {
-            int i = 224 - (((flashctr++) % 15) * 4);
-            btnAllInOne.BackColor = Color.FromArgb(i, i, i);
-        }
 
 
         private void btnReAddAll_Click(object sender, EventArgs e)
+        {
+            DoReAddAll();
+        }
+
+        private void DoReAddAll()
         {
             for (int i = lstMain.Items.Count - 1; i >= 0; i--)
             {
@@ -737,10 +742,6 @@ namespace KalTube
             }
         }
 
-        private void btnStopFlashing_Click(object sender, EventArgs e)
-        {
-            tmrFlash.Enabled = !tmrFlash.Enabled;
-        }
 
         private void mnuGetSubs_Click(object sender, EventArgs e)
         {
@@ -808,13 +809,26 @@ namespace KalTube
             }
         }
 
+        private void choosePlaylistToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ChoosePlaylist();
+        }
 
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowLogin();
+        }
 
+        private void allinoneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoAllInOne();
+        }
 
-
-
-
-
+        private void showPlaylistInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO: also add this to right click on playlists list
+            System.Diagnostics.Process.Start(g_Playlist.PlaylistsEntry.AlternateUri.ToString());
+        }
 
 
     }
