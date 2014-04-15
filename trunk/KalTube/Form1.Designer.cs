@@ -40,28 +40,15 @@
             this.mnuOpenInBrowser = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btnGetVids = new System.Windows.Forms.Button();
-            this.btnChoosePlaylist = new System.Windows.Forms.Button();
-            this.btnGetSubs = new System.Windows.Forms.Button();
-            this.lblActions = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnShowvids = new System.Windows.Forms.Button();
-            this.pbMain = new System.Windows.Forms.ProgressBar();
-            this.lblPbMain = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnAllInOne = new System.Windows.Forms.Button();
-            this.lblCurrent = new System.Windows.Forms.Label();
             this.btnAutoAdd = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.chkOffline = new System.Windows.Forms.CheckBox();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
-            this.tmrFlash = new System.Windows.Forms.Timer(this.components);
-            this.btnReAddAll = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.btnStopFlashing = new System.Windows.Forms.Button();
-            this.mnuMain = new System.Windows.Forms.MenuStrip();
+            this.mnuMain = new System.Windows.Forms.ToolStrip();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allinoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allInOneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualSteps = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGetSubs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGetVidsFromSubs = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,11 +71,18 @@
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.choosePlaylistToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbMain = new System.Windows.Forms.ToolStripProgressBar();
+            this.lblPbMain = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblActions = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblCurrent = new System.Windows.Forms.ToolStripLabel();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.showPlaylistInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuListMain.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
@@ -108,9 +102,9 @@
             this.lstMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstMain.FullRowSelect = true;
             this.lstMain.LargeImageList = this.imageList1;
-            this.lstMain.Location = new System.Drawing.Point(0, 72);
+            this.lstMain.Location = new System.Drawing.Point(0, 54);
             this.lstMain.Name = "lstMain";
-            this.lstMain.Size = new System.Drawing.Size(1276, 321);
+            this.lstMain.Size = new System.Drawing.Size(808, 131);
             this.lstMain.SmallImageList = this.imageList1;
             this.lstMain.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.lstMain.TabIndex = 1000;
@@ -183,113 +177,16 @@
             this.imageList1.ImageSize = new System.Drawing.Size(256, 144);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // btnGetVids
-            // 
-            this.btnGetVids.Location = new System.Drawing.Point(0, 43);
-            this.btnGetVids.Name = "btnGetVids";
-            this.btnGetVids.Size = new System.Drawing.Size(75, 23);
-            this.btnGetVids.TabIndex = 1001;
-            this.btnGetVids.Text = "2. Get Vids";
-            this.btnGetVids.UseVisualStyleBackColor = true;
-            this.btnGetVids.Click += new System.EventHandler(this.btnGetVids_Click);
-            // 
-            // btnChoosePlaylist
-            // 
-            this.btnChoosePlaylist.Location = new System.Drawing.Point(81, 43);
-            this.btnChoosePlaylist.Name = "btnChoosePlaylist";
-            this.btnChoosePlaylist.Size = new System.Drawing.Size(100, 23);
-            this.btnChoosePlaylist.TabIndex = 1002;
-            this.btnChoosePlaylist.Text = "4. Choose Playlist";
-            this.btnChoosePlaylist.UseVisualStyleBackColor = true;
-            this.btnChoosePlaylist.Click += new System.EventHandler(this.btnChoosePlaylist_Click);
-            // 
-            // btnGetSubs
-            // 
-            this.btnGetSubs.Location = new System.Drawing.Point(0, 27);
-            this.btnGetSubs.Name = "btnGetSubs";
-            this.btnGetSubs.Size = new System.Drawing.Size(75, 23);
-            this.btnGetSubs.TabIndex = 1003;
-            this.btnGetSubs.Text = "1. Get Subs";
-            this.btnGetSubs.UseVisualStyleBackColor = true;
-            this.btnGetSubs.Click += new System.EventHandler(this.btnGetSubs_Click);
-            // 
-            // lblActions
-            // 
-            this.lblActions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblActions.Location = new System.Drawing.Point(1107, 40);
-            this.lblActions.Name = "lblActions";
-            this.lblActions.Size = new System.Drawing.Size(159, 23);
-            this.lblActions.TabIndex = 1004;
-            this.lblActions.Text = "0 Actions";
-            this.lblActions.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnShowvids
-            // 
-            this.btnShowvids.Location = new System.Drawing.Point(81, 27);
-            this.btnShowvids.Name = "btnShowvids";
-            this.btnShowvids.Size = new System.Drawing.Size(100, 23);
-            this.btnShowvids.TabIndex = 1005;
-            this.btnShowvids.Text = "3. Show Vids";
-            this.btnShowvids.UseVisualStyleBackColor = true;
-            this.btnShowvids.Click += new System.EventHandler(this.btnShowvids_Click);
-            // 
-            // pbMain
-            // 
-            this.pbMain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbMain.Location = new System.Drawing.Point(1053, 0);
-            this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(223, 24);
-            this.pbMain.TabIndex = 1006;
-            // 
-            // lblPbMain
-            // 
-            this.lblPbMain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPbMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPbMain.Location = new System.Drawing.Point(743, 31);
-            this.lblPbMain.Name = "lblPbMain";
-            this.lblPbMain.Size = new System.Drawing.Size(85, 16);
-            this.lblPbMain.TabIndex = 1007;
-            this.lblPbMain.Text = "lblPbMain";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(187, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
-            this.label1.TabIndex = 1008;
-            this.label1.Text = "5. Tick boxes below";
-            // 
-            // btnAllInOne
-            // 
-            this.btnAllInOne.Location = new System.Drawing.Point(190, 43);
-            this.btnAllInOne.Name = "btnAllInOne";
-            this.btnAllInOne.Size = new System.Drawing.Size(99, 23);
-            this.btnAllInOne.TabIndex = 1009;
-            this.btnAllInOne.Text = "All In One 1-4";
-            this.btnAllInOne.UseVisualStyleBackColor = true;
-            this.btnAllInOne.Click += new System.EventHandler(this.btnAllInOne_Click);
-            // 
-            // lblCurrent
-            // 
-            this.lblCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCurrent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCurrent.Location = new System.Drawing.Point(643, 47);
-            this.lblCurrent.Name = "lblCurrent";
-            this.lblCurrent.Size = new System.Drawing.Size(185, 18);
-            this.lblCurrent.TabIndex = 1010;
-            this.lblCurrent.Text = "lblCurrent";
-            // 
             // btnAutoAdd
             // 
-            this.btnAutoAdd.Location = new System.Drawing.Point(570, 31);
+            this.btnAutoAdd.Location = new System.Drawing.Point(414, 23);
             this.btnAutoAdd.Name = "btnAutoAdd";
-            this.btnAutoAdd.Size = new System.Drawing.Size(75, 39);
+            this.btnAutoAdd.Size = new System.Drawing.Size(75, 25);
             this.btnAutoAdd.TabIndex = 1011;
             this.btnAutoAdd.Text = "AutoAdd";
             this.toolTip1.SetToolTip(this.btnAutoAdd, "Automatically add all videos according to rules; remove them (and bad rules) from" +
@@ -300,7 +197,7 @@
             // chkOffline
             // 
             this.chkOffline.AutoSize = true;
-            this.chkOffline.Location = new System.Drawing.Point(478, 53);
+            this.chkOffline.Location = new System.Drawing.Point(12, 29);
             this.chkOffline.Name = "chkOffline";
             this.chkOffline.Size = new System.Drawing.Size(86, 17);
             this.chkOffline.TabIndex = 1013;
@@ -312,46 +209,21 @@
             // 
             // dtpStart
             // 
-            this.dtpStart.Location = new System.Drawing.Point(364, 27);
+            this.dtpStart.Location = new System.Drawing.Point(199, 28);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(200, 20);
             this.dtpStart.TabIndex = 1012;
             this.dtpStart.ValueChanged += new System.EventHandler(this.dtpStart_ValueChanged);
             // 
-            // tmrFlash
-            // 
-            this.tmrFlash.Enabled = true;
-            this.tmrFlash.Tick += new System.EventHandler(this.tmrFlash_Tick);
-            // 
-            // btnReAddAll
-            // 
-            this.btnReAddAll.Location = new System.Drawing.Point(295, 27);
-            this.btnReAddAll.Name = "btnReAddAll";
-            this.btnReAddAll.Size = new System.Drawing.Size(75, 23);
-            this.btnReAddAll.TabIndex = 1014;
-            this.btnReAddAll.Text = "Re-Add all";
-            this.btnReAddAll.UseVisualStyleBackColor = true;
-            this.btnReAddAll.Click += new System.EventHandler(this.btnReAddAll_Click);
-            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(383, 49);
+            this.checkBox1.Location = new System.Drawing.Point(104, 31);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(89, 17);
             this.checkBox1.TabIndex = 1015;
             this.checkBox1.Text = "Slow - TODO";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // btnStopFlashing
-            // 
-            this.btnStopFlashing.Location = new System.Drawing.Point(276, 43);
-            this.btnStopFlashing.Name = "btnStopFlashing";
-            this.btnStopFlashing.Size = new System.Drawing.Size(13, 23);
-            this.btnStopFlashing.TabIndex = 1016;
-            this.btnStopFlashing.Text = "stop flashing";
-            this.btnStopFlashing.UseVisualStyleBackColor = true;
-            this.btnStopFlashing.Click += new System.EventHandler(this.btnStopFlashing_Click);
             // 
             // mnuMain
             // 
@@ -359,30 +231,38 @@
             this.actionsToolStripMenuItem,
             this.optionsToolStripMenuItem,
             this.automationToolStripMenuItem,
-            this.windowsToolStripMenuItem});
+            this.windowsToolStripMenuItem,
+            this.pbMain,
+            this.lblPbMain,
+            this.toolStripSeparator2,
+            this.lblActions,
+            this.toolStripSeparator3,
+            this.lblCurrent});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(1276, 24);
+            this.mnuMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.mnuMain.Size = new System.Drawing.Size(808, 25);
             this.mnuMain.TabIndex = 1019;
             this.mnuMain.Text = "menuStrip1";
             // 
             // actionsToolStripMenuItem
             // 
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allinoneToolStripMenuItem,
+            this.allInOneToolStripMenuItem,
             this.mnuIndividualSteps,
             this.toolStripMenuItem1,
             this.sortToolStripMenuItem,
             this.findToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
-            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 25);
             this.actionsToolStripMenuItem.Text = "Actions";
             // 
-            // allinoneToolStripMenuItem
+            // allInOneToolStripMenuItem
             // 
-            this.allinoneToolStripMenuItem.Name = "allinoneToolStripMenuItem";
-            this.allinoneToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.allinoneToolStripMenuItem.Text = "All-in-one";
+            this.allInOneToolStripMenuItem.Name = "allInOneToolStripMenuItem";
+            this.allInOneToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.allInOneToolStripMenuItem.Text = "All-in-one";
+            this.allInOneToolStripMenuItem.Click += new System.EventHandler(this.allinoneToolStripMenuItem_Click);
             // 
             // mnuIndividualSteps
             // 
@@ -399,36 +279,36 @@
             // mnuGetSubs
             // 
             this.mnuGetSubs.Name = "mnuGetSubs";
-            this.mnuGetSubs.Size = new System.Drawing.Size(216, 22);
-            this.mnuGetSubs.Text = "&1. Get Subs List";
+            this.mnuGetSubs.Size = new System.Drawing.Size(233, 22);
+            this.mnuGetSubs.Text = "&1. Get Subs List into cache";
             this.mnuGetSubs.Click += new System.EventHandler(this.mnuGetSubs_Click);
             // 
             // mnuGetVidsFromSubs
             // 
             this.mnuGetVidsFromSubs.Name = "mnuGetVidsFromSubs";
-            this.mnuGetVidsFromSubs.Size = new System.Drawing.Size(216, 22);
-            this.mnuGetVidsFromSubs.Text = "&2. Get Vids from subs";
+            this.mnuGetVidsFromSubs.Size = new System.Drawing.Size(233, 22);
+            this.mnuGetVidsFromSubs.Text = "&2. Get Vids from cached subs";
             this.mnuGetVidsFromSubs.Click += new System.EventHandler(this.mnuGetVidsFromSubs_Click);
             // 
             // mnuShowVids
             // 
             this.mnuShowVids.Name = "mnuShowVids";
-            this.mnuShowVids.Size = new System.Drawing.Size(216, 22);
-            this.mnuShowVids.Text = "&3. Show Vids";
+            this.mnuShowVids.Size = new System.Drawing.Size(233, 22);
+            this.mnuShowVids.Text = "&3. Show Vids and load thumbs";
             this.mnuShowVids.Click += new System.EventHandler(this.mnuShowVids_Click);
             // 
             // mnuChoosePlaylist
             // 
             this.mnuChoosePlaylist.Name = "mnuChoosePlaylist";
-            this.mnuChoosePlaylist.Size = new System.Drawing.Size(216, 22);
-            this.mnuChoosePlaylist.Text = "&4. Choose Playlist";
+            this.mnuChoosePlaylist.Size = new System.Drawing.Size(233, 22);
+            this.mnuChoosePlaylist.Text = "&4. Choose Playlist to add to";
             this.mnuChoosePlaylist.Click += new System.EventHandler(this.mnuChoosePlaylist_Click);
             // 
             // mnuNowTickThemBelowToolStripMenuItem
             // 
             this.mnuNowTickThemBelowToolStripMenuItem.Enabled = false;
             this.mnuNowTickThemBelowToolStripMenuItem.Name = "mnuNowTickThemBelowToolStripMenuItem";
-            this.mnuNowTickThemBelowToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.mnuNowTickThemBelowToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.mnuNowTickThemBelowToolStripMenuItem.Text = "&5. Now go tick them below";
             // 
             // toolStripMenuItem1
@@ -482,14 +362,14 @@
             this.addSlowlyToolStripMenuItem,
             this.offlineModeToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 25);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // dateLimitToolStripMenuItem
             // 
             this.dateLimitToolStripMenuItem.Name = "dateLimitToolStripMenuItem";
             this.dateLimitToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.dateLimitToolStripMenuItem.Text = "Date limit";
+            this.dateLimitToolStripMenuItem.Text = "Date limit...";
             // 
             // addSlowlyToolStripMenuItem
             // 
@@ -509,7 +389,7 @@
             this.autoaddBestToolStripMenuItem,
             this.readdListToolStripMenuItem});
             this.automationToolStripMenuItem.Name = "automationToolStripMenuItem";
-            this.automationToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.automationToolStripMenuItem.Size = new System.Drawing.Size(83, 25);
             this.automationToolStripMenuItem.Text = "Automation";
             // 
             // autoaddBestToolStripMenuItem
@@ -528,9 +408,10 @@
             // 
             this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.choosePlaylistToolStripMenuItem1,
-            this.loginToolStripMenuItem});
+            this.loginToolStripMenuItem,
+            this.showPlaylistInBrowserToolStripMenuItem});
             this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(68, 25);
             this.windowsToolStripMenuItem.Text = "Windows";
             // 
             // choosePlaylistToolStripMenuItem1
@@ -538,12 +419,53 @@
             this.choosePlaylistToolStripMenuItem1.Name = "choosePlaylistToolStripMenuItem1";
             this.choosePlaylistToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.choosePlaylistToolStripMenuItem1.Text = "Choose Playlist";
+            this.choosePlaylistToolStripMenuItem1.Click += new System.EventHandler(this.choosePlaylistToolStripMenuItem1_Click);
             // 
             // loginToolStripMenuItem
             // 
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.loginToolStripMenuItem.Text = "Login";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.loginToolStripMenuItem.Text = "Login / Change user";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
+            // 
+            // pbMain
+            // 
+            this.pbMain.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.pbMain.Name = "pbMain";
+            this.pbMain.Size = new System.Drawing.Size(100, 22);
+            // 
+            // lblPbMain
+            // 
+            this.lblPbMain.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPbMain.Name = "lblPbMain";
+            this.lblPbMain.Size = new System.Drawing.Size(61, 22);
+            this.lblPbMain.Text = "lblPbMain";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // lblActions
+            // 
+            this.lblActions.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblActions.Name = "lblActions";
+            this.lblActions.Size = new System.Drawing.Size(60, 22);
+            this.lblActions.Text = "lblActions";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // lblCurrent
+            // 
+            this.lblCurrent.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblCurrent.Name = "lblCurrent";
+            this.lblCurrent.Size = new System.Drawing.Size(60, 22);
+            this.lblCurrent.Text = "lblCurrent";
             // 
             // BottomToolStripPanel
             // 
@@ -581,29 +503,24 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(150, 150);
             // 
+            // showPlaylistInBrowserToolStripMenuItem
+            // 
+            this.showPlaylistInBrowserToolStripMenuItem.Name = "showPlaylistInBrowserToolStripMenuItem";
+            this.showPlaylistInBrowserToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.showPlaylistInBrowserToolStripMenuItem.Text = "Show playlist in browser";
+            this.showPlaylistInBrowserToolStripMenuItem.Click += new System.EventHandler(this.showPlaylistInBrowserToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1276, 405);
-            this.Controls.Add(this.pbMain);
+            this.ClientSize = new System.Drawing.Size(808, 197);
             this.Controls.Add(this.mnuMain);
-            this.Controls.Add(this.btnGetSubs);
-            this.Controls.Add(this.btnStopFlashing);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.btnReAddAll);
             this.Controls.Add(this.chkOffline);
             this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.btnAutoAdd);
-            this.Controls.Add(this.btnAllInOne);
-            this.Controls.Add(this.lblCurrent);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblPbMain);
-            this.Controls.Add(this.btnShowvids);
-            this.Controls.Add(this.lblActions);
             this.Controls.Add(this.lstMain);
-            this.Controls.Add(this.btnGetVids);
-            this.Controls.Add(this.btnChoosePlaylist);
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -619,38 +536,25 @@
         #endregion
 
         private System.Windows.Forms.ListView lstMain;
-        private System.Windows.Forms.Button btnGetVids;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ColumnHeader colImage;
         private System.Windows.Forms.ColumnHeader colTitle;
         private System.Windows.Forms.ColumnHeader colDescription;
         private System.Windows.Forms.ColumnHeader colDate;
-        private System.Windows.Forms.Button btnChoosePlaylist;
-        private System.Windows.Forms.Button btnGetSubs;
-        private System.Windows.Forms.Label lblActions;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button btnShowvids;
-        private System.Windows.Forms.ProgressBar pbMain;
-        private System.Windows.Forms.Label lblPbMain;
         private System.Windows.Forms.ContextMenuStrip mnuListMain;
         private System.Windows.Forms.ToolStripMenuItem mnuAddToPlaylist;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mnuOpenInBrowser;
         private System.Windows.Forms.ToolStripMenuItem mnuRemove;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAllInOne;
-        private System.Windows.Forms.Label lblCurrent;
         private System.Windows.Forms.Button btnAutoAdd;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.CheckBox chkOffline;
-        private System.Windows.Forms.Timer tmrFlash;
-        private System.Windows.Forms.Button btnReAddAll;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button btnStopFlashing;
-        private System.Windows.Forms.MenuStrip mnuMain;
+        private System.Windows.Forms.ToolStrip mnuMain;
         private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allinoneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allInOneToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dateLimitToolStripMenuItem;
@@ -678,6 +582,13 @@
         private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
         private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
+        private System.Windows.Forms.ToolStripProgressBar pbMain;
+        private System.Windows.Forms.ToolStripLabel lblPbMain;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel lblActions;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel lblCurrent;
+        private System.Windows.Forms.ToolStripMenuItem showPlaylistInBrowserToolStripMenuItem;
     }
 }
 

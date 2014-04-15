@@ -37,6 +37,7 @@ namespace KalTube
             gpf.AutoPaging = true;
             foreach (var pl in gpf.Entries)
             {
+                
                 var newitem = new ListViewItem(pl.Title);
                 newitem.Tag = pl;
                 lstPlaylists.Items.Add(newitem);
