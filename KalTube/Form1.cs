@@ -45,6 +45,8 @@ namespace KalTube
             ByTitle = 1
         }
 
+        
+
 
         //for debugging
         public static object spare1;
@@ -783,7 +785,8 @@ namespace KalTube
         void FindNext()
         {
             if (lstMain.Items.Count == 0) return;
-            var startIdx = lstMain.FocusedItem.Index;
+            int startIdx=0;
+            if (lstMain.FocusedItem != null) startIdx = lstMain.FocusedItem.Index;
             var numItms = lstMain.Items.Count;
             var foundidx = -1;
             //lstMain.FocusedItem = lstMain.FindItemWithText(findString, false, (lstMain.FocusedItem.Index + 1) % lstMain.Items.Count);
@@ -806,6 +809,7 @@ namespace KalTube
                 {
                     lstMain.Items[i].Selected = (i == foundidx);
                 }
+                //lstMain.EnsureVisible(lstMain.FocusedItem.Index);
             }
         }
 
@@ -830,6 +834,23 @@ namespace KalTube
             System.Diagnostics.Process.Start(g_Playlist.PlaylistsEntry.AlternateUri.ToString());
         }
 
+        private void dateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+//TODO: sort based on checked = desc; indeterminate = asc; unchecked = no sort, or on another field
+ 
+        }
+
 
     }
 }
+/*
+todo: status bar ideas:
+current playlist
+current login, lookat
+actions/progreess, etc (up top),
+sort, find for, etc
+other state
+num subs
+num vids so far
+
+*/
