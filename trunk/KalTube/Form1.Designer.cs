@@ -71,6 +71,7 @@
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.choosePlaylistToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showPlaylistInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbMain = new System.Windows.Forms.ToolStripProgressBar();
             this.lblPbMain = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -82,7 +83,6 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.showPlaylistInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuListMain.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
@@ -327,8 +327,9 @@
             // dateToolStripMenuItem
             // 
             this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
-            this.dateToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.dateToolStripMenuItem.Text = "Date";
+            this.dateToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.dateToolStripMenuItem.Text = "Date Published";
+            this.dateToolStripMenuItem.Click += new System.EventHandler(this.dateToolStripMenuItem_Click);
             // 
             // findToolStripMenuItem
             // 
@@ -417,16 +418,23 @@
             // choosePlaylistToolStripMenuItem1
             // 
             this.choosePlaylistToolStripMenuItem1.Name = "choosePlaylistToolStripMenuItem1";
-            this.choosePlaylistToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+            this.choosePlaylistToolStripMenuItem1.Size = new System.Drawing.Size(201, 22);
             this.choosePlaylistToolStripMenuItem1.Text = "Choose Playlist";
             this.choosePlaylistToolStripMenuItem1.Click += new System.EventHandler(this.choosePlaylistToolStripMenuItem1_Click);
             // 
             // loginToolStripMenuItem
             // 
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.loginToolStripMenuItem.Text = "Login / Change user";
             this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
+            // 
+            // showPlaylistInBrowserToolStripMenuItem
+            // 
+            this.showPlaylistInBrowserToolStripMenuItem.Name = "showPlaylistInBrowserToolStripMenuItem";
+            this.showPlaylistInBrowserToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.showPlaylistInBrowserToolStripMenuItem.Text = "Show playlist in browser";
+            this.showPlaylistInBrowserToolStripMenuItem.Click += new System.EventHandler(this.showPlaylistInBrowserToolStripMenuItem_Click);
             // 
             // pbMain
             // 
@@ -502,13 +510,6 @@
             // ContentPanel
             // 
             this.ContentPanel.Size = new System.Drawing.Size(150, 150);
-            // 
-            // showPlaylistInBrowserToolStripMenuItem
-            // 
-            this.showPlaylistInBrowserToolStripMenuItem.Name = "showPlaylistInBrowserToolStripMenuItem";
-            this.showPlaylistInBrowserToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.showPlaylistInBrowserToolStripMenuItem.Text = "Show playlist in browser";
-            this.showPlaylistInBrowserToolStripMenuItem.Click += new System.EventHandler(this.showPlaylistInBrowserToolStripMenuItem_Click);
             // 
             // Form1
             // 
