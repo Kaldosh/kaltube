@@ -102,7 +102,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.Location = new System.Drawing.Point(12, 106);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(317, 120);
+            this.label4.Size = new System.Drawing.Size(317, 71);
             this.label4.TabIndex = 5;
             this.label4.Text = resources.GetString("label4.Text");
             // 
@@ -133,7 +133,7 @@
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 235);
+            this.ClientSize = new System.Drawing.Size(341, 186);
             this.Controls.Add(this.btnSkip);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.label4);
