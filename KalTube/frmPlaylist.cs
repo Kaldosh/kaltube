@@ -96,7 +96,7 @@ namespace KalTube
             if ((this.Owner as Form1) != null)
             {
                 var sdate = ((Form1)this.Owner).SDate;
-                defname = string.Format("kt{0:yyyy-MM-dd}", sdate);
+                defname = string.Format("kt{0:yyyy-MM-dd} - KalTube", sdate);
             }
             var plname = frmInputBox.InputBox("New playlist name", defname);
             if (plname != null)

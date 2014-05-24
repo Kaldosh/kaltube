@@ -45,7 +45,7 @@ namespace KalTube
             ByTitle = 1
         }
 
-        
+
 
 
         //for debugging
@@ -593,8 +593,8 @@ namespace KalTube
         private void EnableButtons(bool v)
         {
             mnuIndividualSteps.Enabled = v;
-                //= btnAllInOne.Enabled = btnGetSubs.Enabled = btnGetVids.Enabled = btnShowvids.Enabled = btnChoosePlaylist.Enabled
-                
+            //= btnAllInOne.Enabled = btnGetSubs.Enabled = btnGetVids.Enabled = btnShowvids.Enabled = btnChoosePlaylist.Enabled
+
 
         }
 
@@ -785,7 +785,7 @@ namespace KalTube
         void FindNext()
         {
             if (lstMain.Items.Count == 0) return;
-            int startIdx=0;
+            int startIdx = 0;
             if (lstMain.FocusedItem != null) startIdx = lstMain.FocusedItem.Index;
             var numItms = lstMain.Items.Count;
             var foundidx = -1;
@@ -836,8 +836,31 @@ namespace KalTube
 
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-//TODO: sort based on checked = desc; indeterminate = asc; unchecked = no sort, or on another field
- 
+            //TODO: sort based on checked = desc; indeterminate = asc; unchecked = no sort, or on another field
+
+        }
+
+        private void btnGo_Click(object sender, EventArgs e)
+        {
+            DoAllInOne();
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This program will search all your (or someone else's) subscriptions, "
+                + "and put all their videos onscreen to browse through.\r\n"
+                + "First, set a date limit, then click start, choose a playlist, wait for it to all load, then tick boxes on whichever videos you want to add to the playlist; then you go watch the playlist on YouTube as normal.");
+        }
+
+        private void changeLookAtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var result = frmInputBox.InputBox("Enter the USERNAME (not the display name) of the user to look at - it should work if you go to youtube.com/user/xxxxxx\r\nnote: this won't change who you're logged in as, just who'se subscriptions you're pulling from. \r\nWARNING: this isn't tested", "xxxxxx");
+            if (result != null && result != "") g_userLookAt = result;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Environment.Exit(0);
         }
 
 
@@ -852,5 +875,7 @@ sort, find for, etc
 other state
 num subs
 num vids so far
+
+TODO: right click vid to show thumbnail large, etc
 
 */

@@ -45,7 +45,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.chkOffline = new System.Windows.Forms.CheckBox();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkGoSlow = new System.Windows.Forms.CheckBox();
             this.mnuMain = new System.Windows.Forms.ToolStrip();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allInOneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +65,7 @@
             this.dateLimitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSlowlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.offlineModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeLookAtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.automationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoaddBestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readdListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,6 +84,8 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.btnGo = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.mnuListMain.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
@@ -184,9 +187,9 @@
             // 
             // btnAutoAdd
             // 
-            this.btnAutoAdd.Location = new System.Drawing.Point(414, 23);
+            this.btnAutoAdd.Location = new System.Drawing.Point(353, 26);
             this.btnAutoAdd.Name = "btnAutoAdd";
-            this.btnAutoAdd.Size = new System.Drawing.Size(75, 25);
+            this.btnAutoAdd.Size = new System.Drawing.Size(10, 25);
             this.btnAutoAdd.TabIndex = 1011;
             this.btnAutoAdd.Text = "AutoAdd";
             this.toolTip1.SetToolTip(this.btnAutoAdd, "Automatically add all videos according to rules; remove them (and bad rules) from" +
@@ -197,7 +200,7 @@
             // chkOffline
             // 
             this.chkOffline.AutoSize = true;
-            this.chkOffline.Location = new System.Drawing.Point(12, 29);
+            this.chkOffline.Location = new System.Drawing.Point(0, 28);
             this.chkOffline.Name = "chkOffline";
             this.chkOffline.Size = new System.Drawing.Size(86, 17);
             this.chkOffline.TabIndex = 1013;
@@ -209,21 +212,21 @@
             // 
             // dtpStart
             // 
-            this.dtpStart.Location = new System.Drawing.Point(199, 28);
+            this.dtpStart.Location = new System.Drawing.Point(147, 27);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(200, 20);
             this.dtpStart.TabIndex = 1012;
             this.dtpStart.ValueChanged += new System.EventHandler(this.dtpStart_ValueChanged);
             // 
-            // checkBox1
+            // chkGoSlow
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(104, 31);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 17);
-            this.checkBox1.TabIndex = 1015;
-            this.checkBox1.Text = "Slow - TODO";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkGoSlow.AutoSize = true;
+            this.chkGoSlow.Location = new System.Drawing.Point(92, 28);
+            this.chkGoSlow.Name = "chkGoSlow";
+            this.chkGoSlow.Size = new System.Drawing.Size(49, 17);
+            this.chkGoSlow.TabIndex = 1015;
+            this.chkGoSlow.Text = "Slow";
+            this.chkGoSlow.UseVisualStyleBackColor = true;
             // 
             // mnuMain
             // 
@@ -326,6 +329,7 @@
             // 
             // dateToolStripMenuItem
             // 
+            this.dateToolStripMenuItem.Enabled = false;
             this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
             this.dateToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.dateToolStripMenuItem.Text = "Date Published";
@@ -361,7 +365,8 @@
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateLimitToolStripMenuItem,
             this.addSlowlyToolStripMenuItem,
-            this.offlineModeToolStripMenuItem});
+            this.offlineModeToolStripMenuItem,
+            this.changeLookAtToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 25);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -369,20 +374,28 @@
             // dateLimitToolStripMenuItem
             // 
             this.dateLimitToolStripMenuItem.Name = "dateLimitToolStripMenuItem";
-            this.dateLimitToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.dateLimitToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.dateLimitToolStripMenuItem.Text = "Date limit...";
             // 
             // addSlowlyToolStripMenuItem
             // 
+            this.addSlowlyToolStripMenuItem.Enabled = false;
             this.addSlowlyToolStripMenuItem.Name = "addSlowlyToolStripMenuItem";
-            this.addSlowlyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.addSlowlyToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.addSlowlyToolStripMenuItem.Text = "Add slowly ";
             // 
             // offlineModeToolStripMenuItem
             // 
             this.offlineModeToolStripMenuItem.Name = "offlineModeToolStripMenuItem";
-            this.offlineModeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.offlineModeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.offlineModeToolStripMenuItem.Text = "Offline Mode";
+            // 
+            // changeLookAtToolStripMenuItem
+            // 
+            this.changeLookAtToolStripMenuItem.Name = "changeLookAtToolStripMenuItem";
+            this.changeLookAtToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.changeLookAtToolStripMenuItem.Text = "Change look at...";
+            this.changeLookAtToolStripMenuItem.Click += new System.EventHandler(this.changeLookAtToolStripMenuItem_Click);
             // 
             // automationToolStripMenuItem
             // 
@@ -395,6 +408,7 @@
             // 
             // autoaddBestToolStripMenuItem
             // 
+            this.autoaddBestToolStripMenuItem.Enabled = false;
             this.autoaddBestToolStripMenuItem.Name = "autoaddBestToolStripMenuItem";
             this.autoaddBestToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
             this.autoaddBestToolStripMenuItem.Text = "Auto-add best";
@@ -511,13 +525,35 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(150, 150);
             // 
+            // btnGo
+            // 
+            this.btnGo.Location = new System.Drawing.Point(369, 28);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(169, 23);
+            this.btnGo.TabIndex = 1020;
+            this.btnGo.Text = "CLICK HERE TO START";
+            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.Location = new System.Drawing.Point(633, 28);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(163, 23);
+            this.btnHelp.TabIndex = 1021;
+            this.btnHelp.Text = "CLICK HERE FOR HELP";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 197);
+            this.Controls.Add(this.btnHelp);
+            this.Controls.Add(this.btnGo);
             this.Controls.Add(this.mnuMain);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chkGoSlow);
             this.Controls.Add(this.chkOffline);
             this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.btnAutoAdd);
@@ -525,6 +561,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.mnuListMain.ResumeLayout(false);
             this.mnuMain.ResumeLayout(false);
@@ -552,7 +589,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.CheckBox chkOffline;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkGoSlow;
         private System.Windows.Forms.ToolStrip mnuMain;
         private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allInOneToolStripMenuItem;
@@ -590,6 +627,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel lblCurrent;
         private System.Windows.Forms.ToolStripMenuItem showPlaylistInBrowserToolStripMenuItem;
+        private System.Windows.Forms.Button btnGo;
+        private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.ToolStripMenuItem changeLookAtToolStripMenuItem;
     }
 }
 
