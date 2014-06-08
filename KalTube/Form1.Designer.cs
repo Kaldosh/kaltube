@@ -61,22 +61,22 @@
             this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFindByTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFindNext = new System.Windows.Forms.ToolStripMenuItem();
+            this.automationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoaddBestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readdListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateLimitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSlowlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.offlineModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLookAtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.automationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoaddBestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.readdListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.choosePlaylistToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPlaylistInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbMain = new System.Windows.Forms.ToolStripProgressBar();
+            this.lblActions = new System.Windows.Forms.ToolStripLabel();
             this.lblPbMain = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.lblActions = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.lblCurrent = new System.Windows.Forms.ToolStripLabel();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -233,12 +233,11 @@
             this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.actionsToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.automationToolStripMenuItem,
             this.windowsToolStripMenuItem,
             this.pbMain,
+            this.lblActions,
             this.lblPbMain,
             this.toolStripSeparator2,
-            this.lblActions,
             this.toolStripSeparator3,
             this.lblCurrent});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
@@ -255,7 +254,8 @@
             this.mnuIndividualSteps,
             this.toolStripMenuItem1,
             this.sortToolStripMenuItem,
-            this.findToolStripMenuItem});
+            this.findToolStripMenuItem,
+            this.automationToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 25);
             this.actionsToolStripMenuItem.Text = "Actions";
@@ -360,6 +360,28 @@
             this.mnuFindNext.Text = "Find Next";
             this.mnuFindNext.Click += new System.EventHandler(this.mnuFindNext_Click);
             // 
+            // automationToolStripMenuItem
+            // 
+            this.automationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoaddBestToolStripMenuItem,
+            this.readdListToolStripMenuItem});
+            this.automationToolStripMenuItem.Name = "automationToolStripMenuItem";
+            this.automationToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.automationToolStripMenuItem.Text = "Automation";
+            // 
+            // autoaddBestToolStripMenuItem
+            // 
+            this.autoaddBestToolStripMenuItem.Enabled = false;
+            this.autoaddBestToolStripMenuItem.Name = "autoaddBestToolStripMenuItem";
+            this.autoaddBestToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.autoaddBestToolStripMenuItem.Text = "Auto-add best";
+            // 
+            // readdListToolStripMenuItem
+            // 
+            this.readdListToolStripMenuItem.Name = "readdListToolStripMenuItem";
+            this.readdListToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.readdListToolStripMenuItem.Text = "Re-add checked items to playlist";
+            // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -397,28 +419,6 @@
             this.changeLookAtToolStripMenuItem.Text = "Change look at...";
             this.changeLookAtToolStripMenuItem.Click += new System.EventHandler(this.changeLookAtToolStripMenuItem_Click);
             // 
-            // automationToolStripMenuItem
-            // 
-            this.automationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.autoaddBestToolStripMenuItem,
-            this.readdListToolStripMenuItem});
-            this.automationToolStripMenuItem.Name = "automationToolStripMenuItem";
-            this.automationToolStripMenuItem.Size = new System.Drawing.Size(83, 25);
-            this.automationToolStripMenuItem.Text = "Automation";
-            // 
-            // autoaddBestToolStripMenuItem
-            // 
-            this.autoaddBestToolStripMenuItem.Enabled = false;
-            this.autoaddBestToolStripMenuItem.Name = "autoaddBestToolStripMenuItem";
-            this.autoaddBestToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.autoaddBestToolStripMenuItem.Text = "Auto-add best";
-            // 
-            // readdListToolStripMenuItem
-            // 
-            this.readdListToolStripMenuItem.Name = "readdListToolStripMenuItem";
-            this.readdListToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.readdListToolStripMenuItem.Text = "Re-add checked items to playlist";
-            // 
             // windowsToolStripMenuItem
             // 
             this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -454,7 +454,14 @@
             // 
             this.pbMain.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(100, 22);
+            this.pbMain.Size = new System.Drawing.Size(75, 22);
+            // 
+            // lblActions
+            // 
+            this.lblActions.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblActions.Name = "lblActions";
+            this.lblActions.Size = new System.Drawing.Size(60, 22);
+            this.lblActions.Text = "lblActions";
             // 
             // lblPbMain
             // 
@@ -468,13 +475,6 @@
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // lblActions
-            // 
-            this.lblActions.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblActions.Name = "lblActions";
-            this.lblActions.Size = new System.Drawing.Size(60, 22);
-            this.lblActions.Text = "lblActions";
             // 
             // toolStripSeparator3
             // 
@@ -563,6 +563,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.mnuListMain.ResumeLayout(false);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
@@ -598,9 +599,6 @@
         private System.Windows.Forms.ToolStripMenuItem dateLimitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addSlowlyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offlineModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem automationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem autoaddBestToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem readdListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem choosePlaylistToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
@@ -630,6 +628,9 @@
         private System.Windows.Forms.Button btnGo;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.ToolStripMenuItem changeLookAtToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem automationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoaddBestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readdListToolStripMenuItem;
     }
 }
 

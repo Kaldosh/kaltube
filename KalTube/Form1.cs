@@ -432,7 +432,7 @@ namespace KalTube
         {
             lock (actions)
             {
-                lblActions.Text = string.Format("{0} actions; {1} pending; {2} total", actions.Count, PendingCount, TotalActions);
+                lblActions.Text = string.Format("q:{0};p:{1};t:{2}", actions.Count, PendingCount, TotalActions);
             }
         }
 
@@ -861,6 +861,10 @@ namespace KalTube
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             System.Environment.Exit(0);
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
         }
 
 
