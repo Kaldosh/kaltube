@@ -304,6 +304,15 @@ namespace KalTube
                 pbMain.Value++;
                 Application.DoEvents();
             }
+            var oldsubs = new Dictionary<string, bool>();
+            if (cachefile.Exists)
+            {
+                using (var sr = cachefile.OpenText())
+                {
+                    while (!sr.EndOfStream)
+                        oldsubs.Add(sr.ReadLine(), false);
+                }
+            }
             using (var sw = cachefile.CreateText())
             {
                 foreach (var itm in subslist)
@@ -312,7 +321,53 @@ namespace KalTube
                 }
             }
             makeBackup(cachefile);
+            var comparisonResult = compareSubList(oldsubs, subslist);
+            if (!string.IsNullOrEmpty(comparisonResult))
+            {
+                var result = MessageBox.Show("Your subscriptions list has changed. Copy this to clipboard?\r\nWith the new list:\r\n" + comparisonResult, "Comparison differs - Sub list changed", MessageBoxButtons.YesNo);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                    Clipboard.SetText(comparisonResult);
+            }
             return subslist;
+        }
+
+        private string compareSubList(Dictionary<string, bool> oldsubs, List<string> subslist)
+        {
+            var missing = new List<string>();
+            var extras = new List<string>();
+            foreach (var itm in subslist)
+            {
+                if (oldsubs.ContainsKey(itm))
+                {
+                    oldsubs[itm] = true;
+                }
+                else
+                {
+                    extras.Add(itm);
+                }
+            }
+            foreach (var itm in oldsubs)
+            {
+                if (itm.Value == false)
+                    missing.Add(itm.Key);
+            }
+
+            var sb = new System.Text.StringBuilder();
+            if (missing != null && missing.Count > 0)
+            {
+                foreach (var itm in missing)
+                {
+                    sb.AppendLine("Missing: " + itm);
+                }
+            }
+            if (extras != null && extras.Count > 0)
+            {
+                foreach (var itm in extras)
+                {
+                    sb.AppendLine("Extra: " + itm);
+                }
+            }
+            return sb.ToString();
         }
 
         private int AddImg(System.Net.WebClient wc, string thumburl, string videoId)
@@ -587,7 +642,13 @@ namespace KalTube
             {
                 if (itm.Published > SDate) trimCache.Add(itm);
             }
-            ShowVids(trimCache);
+
+            //the imagelist breaks when adding the 3000th image; so limit to 2999 (showing only the oldest)
+            var sIdx = trimCache.Count <= 2999 ? 0 : trimCache.Count - 2999;
+            var cnt = trimCache.Count <= 2999 ? trimCache.Count : 2999;
+            var trimCache2 = trimCache.OrderByDescending(x => x.Published).ToList().GetRange(sIdx, cnt);
+
+            ShowVids(trimCache2);
         }
 
         private void EnableButtons(bool v)
@@ -681,7 +742,10 @@ namespace KalTube
             if (plc.DialogResult == System.Windows.Forms.DialogResult.OK && plc.ChosenPlaylist != null)
             {
                 g_Playlist = plc.ChosenPlaylist;
-                MessageBox.Show("Done. Tick vids to add them to playlist");
+                MessageBox.Show("Done. Tick vids to add them to playlist." 
+                    + (lstMain.Items.Count >=2999
+                    ?"\r\nList at maximum 2999 videos. Showing only oldest. Select a closer end date, or get fewer subs. to see more recent videos"
+                    :""));
             }
             else
             {
