@@ -46,6 +46,7 @@ namespace KalTube
         }
 
 
+        public static int maxImageCount = 1999;
 
 
         //for debugging
@@ -644,8 +645,8 @@ namespace KalTube
             }
 
             //the imagelist breaks when adding the 3000th image; so limit to 2999 (showing only the oldest)
-            var sIdx = trimCache.Count <= 2999 ? 0 : trimCache.Count - 2999;
-            var cnt = trimCache.Count <= 2999 ? trimCache.Count : 2999;
+            var sIdx = trimCache.Count <= maxImageCount ? 0 : trimCache.Count - maxImageCount;
+            var cnt = trimCache.Count <= maxImageCount ? trimCache.Count : maxImageCount;
             var trimCache2 = trimCache.OrderByDescending(x => x.Published).ToList().GetRange(sIdx, cnt);
 
             ShowVids(trimCache2);
@@ -672,6 +673,19 @@ namespace KalTube
                 var itm = lstMain.SelectedItems[i];
                 var vid = (KTVideo)itm.Tag;
                 var proc = System.Diagnostics.Process.Start(vid.WatchPage);
+            }
+        }
+
+        private void openInFirefoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lstMain.SelectedItems.Count; i++)
+            {
+                var itm = lstMain.SelectedItems[i];
+                var vid = (KTVideo)itm.Tag;
+                var proc = System.Diagnostics.Process.Start
+                    (System.Environment.GetFolderPath
+                    (Environment.SpecialFolder.ProgramFilesX86) + @"\Mozilla Firefox\firefox.exe"
+                    , "\"" + vid.WatchPage + "\"");
             }
         }
 
@@ -742,9 +756,9 @@ namespace KalTube
             if (plc.DialogResult == System.Windows.Forms.DialogResult.OK && plc.ChosenPlaylist != null)
             {
                 g_Playlist = plc.ChosenPlaylist;
-                MessageBox.Show("Done. Tick vids to add them to playlist." 
-                    + (lstMain.Items.Count >=2999
-                    ?"\r\nList at maximum 2999 videos. Showing only oldest. Select a closer end date, or get fewer subs. to see more recent videos"
+                MessageBox.Show("Done. Tick vids to add them to playlist."
+                    + (lstMain.Items.Count >= maxImageCount
+                    ?"\r\nList at maximum " + maxImageCount.ToString() + " videos. Showing only oldest. Select a closer end date, or get fewer subs. to see more recent videos"
                     :""));
             }
             else
@@ -932,6 +946,7 @@ namespace KalTube
         }
 
 
+
     }
 }
 /*
@@ -943,7 +958,7 @@ sort, find for, etc
 other state
 num subs
 num vids so far
-
+open in firefox button
 TODO: right click vid to show thumbnail large, etc
 
 */
