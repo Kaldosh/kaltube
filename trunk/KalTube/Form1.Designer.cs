@@ -86,6 +86,7 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.btnGo = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
+            this.openInFirefoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuListMain.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
@@ -143,9 +144,10 @@
             this.mnuAddToPlaylist,
             this.toolStripSeparator1,
             this.mnuOpenInBrowser,
+            this.openInFirefoxToolStripMenuItem,
             this.mnuRemove});
             this.mnuListMain.Name = "mnuListMain";
-            this.mnuListMain.Size = new System.Drawing.Size(187, 76);
+            this.mnuListMain.Size = new System.Drawing.Size(187, 120);
             // 
             // mnuAddToPlaylist
             // 
@@ -545,6 +547,13 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
+            // openInFirefoxToolStripMenuItem
+            // 
+            this.openInFirefoxToolStripMenuItem.Name = "openInFirefoxToolStripMenuItem";
+            this.openInFirefoxToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.openInFirefoxToolStripMenuItem.Text = "Open in Firefo&x";
+            this.openInFirefoxToolStripMenuItem.Click += new System.EventHandler(this.openInFirefoxToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -631,6 +640,7 @@
         private System.Windows.Forms.ToolStripMenuItem automationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoaddBestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readdListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openInFirefoxToolStripMenuItem;
     }
 }
 
