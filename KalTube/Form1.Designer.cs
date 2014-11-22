@@ -38,6 +38,7 @@
             this.mnuAddToPlaylist = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuOpenInBrowser = new System.Windows.Forms.ToolStripMenuItem();
+            this.openInFirefoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -86,16 +87,16 @@
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.btnGo = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
-            this.openInFirefoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showThumbnailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuListMain.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstMain
             // 
-            this.lstMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lstMain.CheckBoxes = true;
             this.lstMain.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colImage,
@@ -145,9 +146,11 @@
             this.toolStripSeparator1,
             this.mnuOpenInBrowser,
             this.openInFirefoxToolStripMenuItem,
-            this.mnuRemove});
+            this.mnuRemove,
+            this.showThumbnailToolStripMenuItem});
             this.mnuListMain.Name = "mnuListMain";
-            this.mnuListMain.Size = new System.Drawing.Size(187, 120);
+            this.mnuListMain.Size = new System.Drawing.Size(187, 142);
+            this.mnuListMain.Opening += new System.ComponentModel.CancelEventHandler(this.mnuListMain_Opening);
             // 
             // mnuAddToPlaylist
             // 
@@ -168,6 +171,13 @@
             this.mnuOpenInBrowser.Size = new System.Drawing.Size(186, 22);
             this.mnuOpenInBrowser.Text = "Open in browser";
             this.mnuOpenInBrowser.Click += new System.EventHandler(this.mnuOpenInBrowser_Click);
+            // 
+            // openInFirefoxToolStripMenuItem
+            // 
+            this.openInFirefoxToolStripMenuItem.Name = "openInFirefoxToolStripMenuItem";
+            this.openInFirefoxToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.openInFirefoxToolStripMenuItem.Text = "Open in Firefo&x";
+            this.openInFirefoxToolStripMenuItem.Click += new System.EventHandler(this.openInFirefoxToolStripMenuItem_Click);
             // 
             // mnuRemove
             // 
@@ -195,7 +205,7 @@
             this.btnAutoAdd.TabIndex = 1011;
             this.btnAutoAdd.Text = "AutoAdd";
             this.toolTip1.SetToolTip(this.btnAutoAdd, "Automatically add all videos according to rules; remove them (and bad rules) from" +
-        " this list; and scroll down to starting point");
+                    " this list; and scroll down to starting point");
             this.btnAutoAdd.UseVisualStyleBackColor = true;
             this.btnAutoAdd.Click += new System.EventHandler(this.btnAutoAdd_Click);
             // 
@@ -208,7 +218,7 @@
             this.chkOffline.TabIndex = 1013;
             this.chkOffline.Text = "Offline Mode";
             this.toolTip1.SetToolTip(this.chkOffline, "When checked, the videos are just stored in memory and not added to the playlist " +
-        "until unchecked");
+                    "until unchecked");
             this.chkOffline.UseVisualStyleBackColor = true;
             this.chkOffline.CheckedChanged += new System.EventHandler(this.chkOffline_CheckedChanged);
             // 
@@ -547,12 +557,12 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
-            // openInFirefoxToolStripMenuItem
+            // showThumbnailToolStripMenuItem
             // 
-            this.openInFirefoxToolStripMenuItem.Name = "openInFirefoxToolStripMenuItem";
-            this.openInFirefoxToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.openInFirefoxToolStripMenuItem.Text = "Open in Firefo&x";
-            this.openInFirefoxToolStripMenuItem.Click += new System.EventHandler(this.openInFirefoxToolStripMenuItem_Click);
+            this.showThumbnailToolStripMenuItem.Name = "showThumbnailToolStripMenuItem";
+            this.showThumbnailToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.showThumbnailToolStripMenuItem.Text = "Show Thumbnail";
+            this.showThumbnailToolStripMenuItem.Click += new System.EventHandler(this.showThumbnailToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -641,6 +651,7 @@
         private System.Windows.Forms.ToolStripMenuItem autoaddBestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readdListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openInFirefoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showThumbnailToolStripMenuItem;
     }
 }
 
