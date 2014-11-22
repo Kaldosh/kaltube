@@ -222,22 +222,37 @@ namespace KalTube
             var wc = new System.Net.WebClient();
 
             pbMain.Maximum = cacheVids.Count;
+            imgsToAdd = new List<Image>();
+            var itmsToAdd = new List<ListViewItem>();
             lstMain.Items.Clear();
             var lastUpdate = DateTime.UtcNow;
+
 
             foreach (var vid in cacheVids)
             {
                 var instant = DateTime.UtcNow;
-                if (instant.AddSeconds(-1) > lastUpdate)
+                if (instant.AddSeconds(-1) > lastUpdate || imgsToAdd.Count>=150)
                 {
+                    var st = System.Diagnostics.Stopwatch.StartNew();
+                    //add the next bunch of images/items to the list
+                    lstMain.SmallImageList.Images.AddRange(imgsToAdd.ToArray());
+                    st.Stop();
+                    var st2 = System.Diagnostics.Stopwatch.StartNew();
+                    lstMain.Items.AddRange(itmsToAdd.ToArray());
+                    st2.Stop();
+                    imgsToAdd = new List<Image>();
+                    itmsToAdd = new List<ListViewItem>();
+                    var st3 = System.Diagnostics.Stopwatch.StartNew();
+                    //update gui
                     Application.DoEvents();
                     lastUpdate = instant;
+                    st3.Stop();
                 }
                 pbMain.Value = lstMain.Items.Count;
 
 
-                int imgidx = -1;
-                imgidx = AddImg(wc, vid.ThumbUrl, vid.VideoId);
+                int imgIdx = -1;
+                imgIdx = AddImg(wc, vid.ThumbUrl, vid.VideoId);
 
                 var ago = (DateTime.Now - vid.Published).TotalDays;
 
@@ -247,10 +262,10 @@ namespace KalTube
                 else if (vid.Duration.TotalMinutes > 12.8) durwarn = " - (l)";
 
                 var subitms = new string[] { vid.Published.ToString("yyyy-MM-dd HH:mm:ss"), vid.Author + "\r\n" + durstring + durwarn + "\r\n" + vid.Title, vid.Description, string.Format("{0:yyyy-MM-dd}\r\n{0:HH:mm:ss}\r\n({1:0.0}d ago)", vid.Published, ago) };
-                var newitm = new ListViewItem(subitms, imgidx);
+                var newitm = new ListViewItem(subitms, imgIdx);
 
                 newitm.Tag = vid;
-                lstMain.Items.Add(newitm);
+                itmsToAdd.Add(newitm);
 
             }
 
@@ -371,22 +386,63 @@ namespace KalTube
             return sb.ToString();
         }
 
+        private double totImgTimeTot = 0;
+        private double totImgTimeFileCheck = 0;
+        private double totImgTimeDownload = 0;
+        private double totImgTimeImageLoad = 0;
+        private double totImgTimeImageAdd = 0;
+        private int totImgNumTot = 0;
+        private int totImgNumFileCheck = 0;
+        private int totImgNumDownload = 0;
+        private int totImgNumImageLoad = 0;
+        private int totImgNumImageAdd = 0;
+
+        private List<Image> imgsToAdd;
         private int AddImg(System.Net.WebClient wc, string thumburl, string videoId)
         {
+
+            if (totImgNumTot < 0) //used for breakpoint
+            {
+                totImgTimeTot = totImgTimeFileCheck = totImgTimeDownload = totImgTimeImageLoad = totImgTimeImageAdd = 0;
+                totImgNumTot = totImgNumFileCheck = totImgNumDownload = totImgNumImageLoad = totImgNumImageAdd = 0;
+            }
+
+            System.Diagnostics.Stopwatch stTemp;
+            var stTot = System.Diagnostics.Stopwatch.StartNew();
+
             string ext = ".jpg";
             var dot = thumburl.LastIndexOf(".");
             if (dot >= 0) ext = thumburl.Substring(dot);
             var thumbname = "thumbcache/thumb-" + videoId + ext;
+
+            stTemp = System.Diagnostics.Stopwatch.StartNew();
             var thumbfile = new System.IO.FileInfo(thumbname);
             if (!thumbfile.Directory.Exists) thumbfile.Directory.Create();
-            if (!thumbfile.Exists)
+            var fileExists = thumbfile.Exists;
+            stTemp.Stop(); totImgTimeFileCheck += stTemp.Elapsed.TotalSeconds; totImgNumFileCheck++;
+
+            if (!fileExists)
+            {
+                stTemp = System.Diagnostics.Stopwatch.StartNew();
                 wc.DownloadFile(thumburl, thumbname);
+                stTemp.Stop(); totImgTimeDownload += stTemp.Elapsed.TotalSeconds; totImgNumDownload++;
+            }
+
+            stTemp = System.Diagnostics.Stopwatch.StartNew();
             var bmp = new Bitmap(thumbname);
+            stTemp.Stop(); totImgTimeImageLoad += stTemp.Elapsed.TotalSeconds; totImgNumImageLoad++;
+
+
             lock (lstMain.SmallImageList)
             {
-                lstMain.SmallImageList.Images.Add(bmp);
-                return lstMain.SmallImageList.Images.Count - 1;
+                stTemp = System.Diagnostics.Stopwatch.StartNew();
+                //lstMain.SmallImageList.Images.Add(lstMain.Items.Count.ToString(), bmp);
+                imgsToAdd.Add(bmp);
+                stTemp.Stop(); totImgTimeImageAdd += stTemp.Elapsed.TotalSeconds; totImgNumImageAdd++;
+                stTot.Stop(); totImgTimeTot += stTot.Elapsed.TotalSeconds; totImgNumTot++;
+                return lstMain.SmallImageList.Images.Count + imgsToAdd.Count - 1;
             }
+
         }
 
         /// <summary>
@@ -758,8 +814,8 @@ namespace KalTube
                 g_Playlist = plc.ChosenPlaylist;
                 MessageBox.Show("Done. Tick vids to add them to playlist."
                     + (lstMain.Items.Count >= maxImageCount
-                    ?"\r\nList at maximum " + maxImageCount.ToString() + " videos. Showing only oldest. Select a closer end date, or get fewer subs. to see more recent videos"
-                    :""));
+                    ? "\r\nList at maximum " + maxImageCount.ToString() + " videos. Showing only oldest. Select a closer end date, or get fewer subs. to see more recent videos"
+                    : ""));
             }
             else
             {
@@ -943,6 +999,24 @@ namespace KalTube
 
         private void Form1_Resize(object sender, EventArgs e)
         {
+        }
+
+        private void mnuListMain_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void showThumbnailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lstMain.SelectedItems.Count; i++)
+            {
+                var itm = lstMain.SelectedItems[i];
+                var vid = (KTVideo)itm.Tag;// (KTVideo)lstMain.Items[lstMain.FocusedItem.Index].Tag;
+                var proc = System.Diagnostics.Process.Start
+                    (System.Environment.GetFolderPath
+                    (Environment.SpecialFolder.ProgramFilesX86) + @"\Mozilla Firefox\firefox.exe"
+                    , "\"" + vid.ThumbUrl + "\"");
+            } 
         }
 
 

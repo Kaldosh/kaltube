@@ -26,7 +26,7 @@ namespace KalTube
         {
             var thumbs = vid.Thumbnails.ToDictionary(x => x.Attributes["name"]);
             ThumbUrl = thumbs["mqdefault"].Url;
-
+            
             Published = vid.AtomEntry.Published;
             DurationSecs = float.Parse(vid.Media.Duration.Seconds);
 
