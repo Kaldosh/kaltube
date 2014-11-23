@@ -149,7 +149,7 @@ namespace KalTube
         {
             EnableButtons(false);
             var cacheVids = GetVids();
-            MessageBox.Show(string.Format("Saved {0} videos to cache.", cacheVids.Count));
+            MessageBox.Show(this, string.Format("Saved {0} videos to cache.", cacheVids.Count));
             EnableButtons(true);
         }
 
@@ -340,7 +340,7 @@ namespace KalTube
             var comparisonResult = compareSubList(oldsubs, subslist);
             if (!string.IsNullOrEmpty(comparisonResult))
             {
-                var result = MessageBox.Show("Your subscriptions list has changed. Copy this to clipboard?\r\nWith the new list:\r\n" + comparisonResult, "Comparison differs - Sub list changed", MessageBoxButtons.YesNo);
+                var result = MessageBox.Show(this,"Your subscriptions list has changed. Copy this to clipboard?\r\nWith the new list:\r\n" + comparisonResult, "Comparison differs - Sub list changed", MessageBoxButtons.YesNo);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                     Clipboard.SetText(comparisonResult);
             }
@@ -510,7 +510,7 @@ namespace KalTube
                                         + "Press Ignore to forget about adding this one\r\n"
                                         + "Error was: " + ex.GetType().ToString() + ":" + ex.Message + "\r\n";
                             if (ex is GDataRequestException) msg += "\r\n" + ((GDataRequestException)ex).ResponseString;
-                            var result = MessageBox.Show(msg, "Error adding to playlist", MessageBoxButtons.AbortRetryIgnore);
+                            var result = MessageBox.Show(this, msg, "Error adding to playlist", MessageBoxButtons.AbortRetryIgnore);
                             switch (result)
                             {
                                 case System.Windows.Forms.DialogResult.Abort:
@@ -577,7 +577,7 @@ namespace KalTube
                     var warnmsg = string.Format("Long video {0:hh\\:mm\\:ss}. Add anyway?", vid.Duration);
                     //this is 7.3 minutes to avoid fear of the 10:01 duration ... nobody cares about the 7:18 video
                     if (vid.Duration.TotalMinutes < 7.3
-                        || MessageBox.Show(warnmsg, "Long Video", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.OK)
+                        || MessageBox.Show(this, warnmsg, "Long Video", MessageBoxButtons.OKCancel  , MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.OK)
                     {
                         QueueVideo(vid);
                     }
@@ -594,7 +594,7 @@ namespace KalTube
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ticking a video will add it to a playlist. Login and select a playlist first. Unable to add - Error message:" + ex.Message);
+                MessageBox.Show(this, "Ticking a video will add it to a playlist. Login and select a playlist first. Unable to add - Error message:" + ex.Message);
                 e.NewValue = e.CurrentValue;
                 return;
             }
@@ -657,7 +657,7 @@ namespace KalTube
         {
             EnableButtons(false);
             var sublist = GetSubs();
-            MessageBox.Show(string.Format("Done. Cached {0} subscriptions.", sublist.Count));
+            MessageBox.Show(this, string.Format("Done. Cached {0} subscriptions.", sublist.Count));
             EnableButtons(true);
         }
 
@@ -812,14 +812,14 @@ namespace KalTube
             if (plc.DialogResult == System.Windows.Forms.DialogResult.OK && plc.ChosenPlaylist != null)
             {
                 g_Playlist = plc.ChosenPlaylist;
-                MessageBox.Show("Done. Tick vids to add them to playlist."
+                MessageBox.Show(this, "Done. Tick vids to add them to playlist."
                     + (lstMain.Items.Count >= maxImageCount
                     ? "\r\nList at maximum " + maxImageCount.ToString() + " videos. Showing only oldest. Select a closer end date, or get fewer subs. to see more recent videos"
                     : ""));
             }
             else
             {
-                MessageBox.Show("Vids loaded. You'll need to choose a playlist to be able to add them");
+                MessageBox.Show(this, "Vids loaded. You'll need to choose a playlist to be able to add them");
             }
         }
 
@@ -828,7 +828,7 @@ namespace KalTube
             //TODO: criteria for:
             //auto adding to playlist, like a BoxxyBabee video; (also have time range)
             //auto deleting from selections, like a 2 hour nasa video
-            MessageBox.Show("TODO: criteria for:\r\nauto adding to playlist, like a BoxxyBabee video; (also have time range)\r\nauto deleting from selections, like a 2 hour nasa video; and points based on how often a video is uploaded; with add/ignore history contributing to customized feed");
+            MessageBox.Show(this, "TODO: criteria for:\r\nauto adding to playlist, like a BoxxyBabee video; (also have time range)\r\nauto deleting from selections, like a 2 hour nasa video; and points based on how often a video is uploaded; with add/ignore history contributing to customized feed");
 
             //try
             //{
@@ -935,7 +935,7 @@ namespace KalTube
                 }
             }
             if (foundidx == -1)
-                MessageBox.Show("Not found");
+                MessageBox.Show(this, "Not found");
             else
             {
                 lstMain.FocusedItem = lstMain.Items[foundidx];
@@ -981,7 +981,7 @@ namespace KalTube
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This program will search all your (or someone else's) subscriptions, "
+            MessageBox.Show(this, "This program will search all your (or someone else's) subscriptions, "
                 + "and put all their videos onscreen to browse through.\r\n"
                 + "First, set a date limit, then click start, choose a playlist, wait for it to all load, then tick boxes on whichever videos you want to add to the playlist; then you go watch the playlist on YouTube as normal.");
         }
