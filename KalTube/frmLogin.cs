@@ -22,7 +22,7 @@ namespace KalTube
         {
             if (Username == "" || Password == "")
             {
-                MessageBox.Show(this, "Please enter username and password.");
+                MessageBox.Show("Please enter username and password.");
                 return;
             }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -59,7 +59,7 @@ namespace KalTube
         {
             if (Username == "")
             {
-                MessageBox.Show(this, "You still need a username; for who to look at.");
+                MessageBox.Show("You still need a username; for who to look at.");
                 return;
             }
             this.DialogResult = System.Windows.Forms.DialogResult.Ignore;
