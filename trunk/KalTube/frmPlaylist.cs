@@ -28,7 +28,7 @@ namespace KalTube
 
         private void frmPlaylist_Load(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this, "create new playlist?", "create?", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("create new playlist?", "create?", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
                 PromptAddNewPlaylist(false);
             }
@@ -54,7 +54,7 @@ namespace KalTube
         {
             if (lstPlaylists.SelectedIndex == -1 || ChosenPlaylist == null)
             {
-                MessageBox.Show(this, "please select a playlist");
+                MessageBox.Show("please select a playlist");
                 return;
             }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -114,7 +114,7 @@ namespace KalTube
                     lstPlaylists.Items.Insert(0, newitem);
                     lstPlaylists.SelectedIndex = 0;
                     lstPlaylists_SelectedIndexChanged(null,null);
-                    MessageBox.Show(this, "TODO: this add/load/select doesn't really work; you may want to quit and reload the playlists list");
+                    MessageBox.Show("TODO: this add/load/select doesn't really work; you may want to quit and reload the playlists list");
                 }
             }
         }
