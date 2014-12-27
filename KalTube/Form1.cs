@@ -33,6 +33,7 @@ namespace KalTube
 
         /// <summary>
         /// if this is throwing errors; you need a settings.txt which contains a developer key. youtube can work without one, but quota/speed limits are lower. lookup the google api on getting your own developer key. (you just have to click a button, then copy the gibberish letters)
+        /// I think you can get one from https://code.google.com/apis/console/?pli=1
         /// </summary>
         string g_devkey = MySettings["devkey"];
         string g_userLookAt;
@@ -231,7 +232,7 @@ namespace KalTube
             foreach (var vid in cacheVids)
             {
                 var instant = DateTime.UtcNow;
-                if (instant.AddSeconds(-1) > lastUpdate || imgsToAdd.Count>=150)
+                if (instant.AddSeconds(-1) > lastUpdate || imgsToAdd.Count >= 150)
                 {
                     var st = System.Diagnostics.Stopwatch.StartNew();
                     //add the next bunch of images/items to the list
@@ -270,7 +271,7 @@ namespace KalTube
             }
 
             pbMain.Value = 0;
-
+            if (thumberrors > 0) MessageBox.Show("there were errors loading " + thumberrors.ToString() + " thumbnails");
 
         }
 
@@ -398,6 +399,8 @@ namespace KalTube
         private int totImgNumImageAdd = 0;
 
         private List<Image> imgsToAdd;
+        private int thumberrors = 0;
+
         private int AddImg(System.Net.WebClient wc, string thumburl, string videoId)
         {
 
@@ -421,13 +424,22 @@ namespace KalTube
             var fileExists = thumbfile.Exists;
             stTemp.Stop(); totImgTimeFileCheck += stTemp.Elapsed.TotalSeconds; totImgNumFileCheck++;
 
-            if (!fileExists)
-            {
-                stTemp = System.Diagnostics.Stopwatch.StartNew();
-                wc.DownloadFile(thumburl, thumbname);
-                stTemp.Stop(); totImgTimeDownload += stTemp.Elapsed.TotalSeconds; totImgNumDownload++;
-            }
 
+            try
+            {
+
+                if (!fileExists)
+                {
+                    stTemp = System.Diagnostics.Stopwatch.StartNew();
+                    wc.DownloadFile(thumburl, thumbname);
+                    stTemp.Stop(); totImgTimeDownload += stTemp.Elapsed.TotalSeconds; totImgNumDownload++;
+                }
+            }
+            catch (Exception ex)
+            {
+                thumbname = "ThumbError.jpg";
+                thumberrors++;
+            }
             stTemp = System.Diagnostics.Stopwatch.StartNew();
             var bmp = new Bitmap(thumbname);
             stTemp.Stop(); totImgTimeImageLoad += stTemp.Elapsed.TotalSeconds; totImgNumImageLoad++;
@@ -442,7 +454,6 @@ namespace KalTube
                 stTot.Stop(); totImgTimeTot += stTot.Elapsed.TotalSeconds; totImgNumTot++;
                 return lstMain.SmallImageList.Images.Count + imgsToAdd.Count - 1;
             }
-
         }
 
         /// <summary>
@@ -453,7 +464,7 @@ namespace KalTube
             if (g_Playlist == null) throw new ApplicationException("No playlist selected.");
             lock (actions)
             {
-                Logger.RecordEnqueue(vid);
+                Logger.RecordEnqueue(vid, g_Playlist);
                 actions.Enqueue(new YTAction() { VideoId = vid.VideoId, ktvid = vid });
                 TotalActions++;
             }
@@ -577,7 +588,7 @@ namespace KalTube
                     var warnmsg = string.Format("Long video {0:hh\\:mm\\:ss}. Add anyway?", vid.Duration);
                     //this is 7.3 minutes to avoid fear of the 10:01 duration ... nobody cares about the 7:18 video
                     if (vid.Duration.TotalMinutes < 7.3
-                        || MessageBox.Show(warnmsg, "Long Video", MessageBoxButtons.OKCancel  , MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.OK)
+                        || MessageBox.Show(warnmsg, "Long Video", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.OK)
                     {
                         QueueVideo(vid);
                     }
@@ -1016,7 +1027,7 @@ namespace KalTube
                     (System.Environment.GetFolderPath
                     (Environment.SpecialFolder.ProgramFilesX86) + @"\Mozilla Firefox\firefox.exe"
                     , "\"" + vid.ThumbUrl + "\"");
-            } 
+            }
         }
 
 
