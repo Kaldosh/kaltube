@@ -324,28 +324,48 @@ namespace KalTube
             var oldsubs = new Dictionary<string, bool>();
             if (cachefile.Exists)
             {
-                using (var sr = cachefile.OpenText())
-                {
-                    while (!sr.EndOfStream)
-                        oldsubs.Add(sr.ReadLine(), false);
-                }
+                ReadListfile(cachefile, oldsubs);
             }
-            using (var sw = cachefile.CreateText())
-            {
-                foreach (var itm in subslist)
-                {
-                    sw.WriteLine(itm);
-                }
-            }
+            WriteListfile(cachefile, subslist);
             makeBackup(cachefile);
             var comparisonResult = compareSubList(oldsubs, subslist);
             if (!string.IsNullOrEmpty(comparisonResult))
             {
-                var result = MessageBox.Show("Your subscriptions list has changed. Copy this to clipboard?\r\nWith the new list:\r\n" + comparisonResult, "Comparison differs - Sub list changed", MessageBoxButtons.YesNo);
+                var result = MessageBox.Show("Your subscriptions list has changed. (Hint: sometimes youtube thinks you subbed by accident, AND DELETES THEM!, so visit some of these, watych a vid or two, then rerun KalTube and hopefully your list will be back -- otherwise, switch out subcache.txt for one in the backups folder, and run the individual steps, excluding loading subs).\r\n\r\nCopy this to clipboard?\r\nWith the new list:\r\n" + comparisonResult, "Comparison differs - Sub list changed", MessageBoxButtons.YesNo);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                     Clipboard.SetText(comparisonResult);
             }
             return subslist;
+        }
+
+        private static void ReadListfile(System.IO.FileInfo cachefile, Dictionary<string, bool> oldsubs)
+        {
+            using (var sr = cachefile.OpenText())
+            {
+                while (!sr.EndOfStream)
+                {
+                    var lineitm = sr.ReadLine();
+                    try
+                    {
+                        oldsubs.Add(lineitm, false);
+                    }
+                    catch (Exception ex)
+                    {
+                        ////@@@@MessageBox.Show("Duplicate sub in cache:" + lineitm);
+                    }
+                }
+            }
+        }
+
+        private static void WriteListfile(System.IO.FileInfo cachefile, List<string> subslist)
+        {
+            using (var sw = cachefile.CreateText())
+            {
+                foreach (var itm in subslist.OrderBy(x => x.ToLower()))
+                {
+                    sw.WriteLine(itm);
+                }
+            }
         }
 
         private string compareSubList(Dictionary<string, bool> oldsubs, List<string> subslist)
@@ -614,6 +634,21 @@ namespace KalTube
         private void Form1_Load(object sender, EventArgs e)
         {
             ShowLogin();
+        }
+
+        private static void SortExistingSubcacheBackups()
+        {
+            var bakfol = new System.IO.DirectoryInfo(backupsPath);
+            foreach (var itm in bakfol.GetFiles("*.txt"))
+            {
+                var oldsubs = new Dictionary<string, bool>();
+                ReadListfile(itm, oldsubs);
+                var outfile = itm;// new System.IO.FileInfo(itm.FullName + ".sorted.txt");
+                WriteListfile(outfile, oldsubs.Keys.ToList());
+                outfile.CreationTime = itm.CreationTime;
+                outfile.LastWriteTime = itm.LastWriteTime;
+                outfile.LastAccessTime = itm.LastAccessTime;
+            }
         }
 
         private void ShowLogin()
