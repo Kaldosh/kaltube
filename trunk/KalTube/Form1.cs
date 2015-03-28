@@ -162,6 +162,7 @@ namespace KalTube
             int ctr = 0;
             pbMain.Maximum = subslist.Count;
             pbMain.Value = 0;
+            var noVidList = new StringBuilder();
             foreach (var sub in subslist)
             {
                 pbMain.Value = ctr++;
@@ -170,8 +171,10 @@ namespace KalTube
                 var vids = g_reqMakerSelf.GetVideoFeed(username);
                 vids.AutoPaging = true;
                 //vids.Maximum = limit_vids;
+                var vidsFound = 0;
                 foreach (var vid in vids.Entries)
                 {
+                    vidsFound++;
                     var newVid = new KTVideo(vid);
                     cacheVids.Add(newVid);
                     if (newVid.Published < SDate)
@@ -180,8 +183,15 @@ namespace KalTube
                         //gone back far enough. stop requesting more
                     }
                 }
+                if (vidsFound == 0)
+                {
+                    noVidList.AppendLine(username);
+                }
+
+
                 pbMain.Value = ctr;
             }
+            if (noVidList.Length > 0) MessageBox.Show("The following subscriptions had no videos returned: (possible error in retrieval)" + noVidList.ToString());
 
             SaveVids(cacheVids);
             return cacheVids;
@@ -190,6 +200,9 @@ namespace KalTube
 
         public void SaveVids(List<KTVideo> cacheVids)
         {
+
+            var oldVids = LoadVidCache();
+
             var vidfile = new System.IO.FileInfo("vidcache-" + g_userLookAt + ".xml");
             if (!vidfile.Directory.Exists) vidfile.Directory.Create();
             var ser = new System.Xml.Serialization.XmlSerializer(typeof(List<KTVideo>));
@@ -198,6 +211,30 @@ namespace KalTube
                 ser.Serialize(vidstream, cacheVids);
             }
             makeBackup(vidfile);
+
+            if (oldVids != null)
+            {
+                var sb = new System.Text.StringBuilder();
+                foreach (var itm in oldVids.Where(x => x.Published > SDate))
+                {
+                    if (cacheVids.Count(x => x.VideoId == itm.VideoId) == 0)
+                    {
+                        sb.AppendLine(itm.WatchPage + " (" + itm.Uploader + ")");
+                    }
+                }
+                if (sb.Length > 0)
+                {
+                    var result = MessageBox.Show("Missing videos: (existed during last retrieval, but now don't)\r\n.Copy this list? (yes to copy, no to skip cpopying, cancel to quit)\r\n" + sb.ToString(), "Missing vids", MessageBoxButtons.YesNoCancel);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        Clipboard.SetText(sb.ToString());
+                    } else if (result == System.Windows.Forms.DialogResult.Cancel)
+                    {
+                        System.Environment.Exit(0);
+                    }
+                }
+            }
+
         }
 
         private static void makeBackup(System.IO.FileInfo pfile)
@@ -210,6 +247,7 @@ namespace KalTube
         {
             var vidfile = new System.IO.FileInfo("vidcache-" + g_userLookAt + ".xml");
             if (!vidfile.Directory.Exists) vidfile.Directory.Create();
+            if (vidfile.Exists == false) return null;
             var ser = new System.Xml.Serialization.XmlSerializer(typeof(List<KTVideo>));
             using (var vidstream = vidfile.OpenText())
             {
@@ -326,15 +364,18 @@ namespace KalTube
             {
                 ReadListfile(cachefile, oldsubs);
             }
-            WriteListfile(cachefile, subslist);
-            makeBackup(cachefile);
             var comparisonResult = compareSubList(oldsubs, subslist);
             if (!string.IsNullOrEmpty(comparisonResult))
             {
-                var result = MessageBox.Show("Your subscriptions list has changed. (Hint: sometimes youtube thinks you subbed by accident, AND DELETES THEM!, so visit some of these, watych a vid or two, then rerun KalTube and hopefully your list will be back -- otherwise, switch out subcache.txt for one in the backups folder, and run the individual steps, excluding loading subs).\r\n\r\nCopy this to clipboard?\r\nWith the new list:\r\n" + comparisonResult, "Comparison differs - Sub list changed", MessageBoxButtons.YesNo);
+                var result = MessageBox.Show("Your subscriptions list has changed.\r\nYes to copy this list to clipboard\r\nNo to continue without copying\r\nCancel to quit, without saving this new list.\r\n (Hint: sometimes youtube thinks you subbed by accident, AND DELETES THEM!, so visit some of these, watch a vid or two, then rerun KalTube and hopefully your list will be back -- otherwise, switch out subcache.txt for one in the backups folder, and run the individual steps, excluding loading subs).\r\n\r\nCopy this to clipboard?\r\nWith the new list:\r\n" + comparisonResult, "Comparison differs - Sub list changed", MessageBoxButtons.YesNoCancel);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                     Clipboard.SetText(comparisonResult);
+                if (result == System.Windows.Forms.DialogResult.Cancel)
+                    System.Environment.Exit(0);
+
             }
+            WriteListfile(cachefile, subslist);
+            makeBackup(cachefile);
             return subslist;
         }
 
@@ -964,6 +1005,7 @@ namespace KalTube
         }
         void FindNext()
         {
+            if (findString == null) return;
             if (lstMain.Items.Count == 0) return;
             int startIdx = 0;
             if (lstMain.FocusedItem != null) startIdx = lstMain.FocusedItem.Index;
